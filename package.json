@@ -1,0 +1,25 @@
+{
+  "name": "initialize",
+  "version": "1.0.0",
+  "description": "A web development tool for optimizing the work flow of your projects.",
+  "main": "app.js",
+  "dependencies": {
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "gulp-concat": "^2.6.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artisawesm/initialize.git"
+  },
+  "author": "Art San Diego | asd.artsandiego@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/artisawesm/initialize/issues"
+  },
+  "homepage": "https://github.com/artisawesm/initialize#readme"
+}

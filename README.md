@@ -1,4 +1,4 @@
-# initialize
+# init
 
 Web Development tool for optimizing the workflow for your projects.
 
