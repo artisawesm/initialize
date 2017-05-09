@@ -1,18 +1,45 @@
-var gulp = require('gulp');
-var concat = require('gulp-concat');
+const gulp = require('gulp');
+const browserSync = require('browser-sync').create();
+const autoprefixer = require('gulp-autoprefixer');
+const sourcemaps = require('gulp-sourcemaps');
+const beautify = require('gulp-beautify');
+const concat = require('gulp-concat');
+const imagemin = require('gulp-imagemin');
+const rename = require('gulp-rename');
+const sass = require('gulp-sass');
+const uglify = require('gulp-uglify');
+const uglifycss = require('gulp-uglifycss');
 
-var path = {
-	jsLib: './src/assets/script/lib/'
+const srcPath = {
+	// sources
+	scss: './src/assets/scss/**/*.scss',
+	js: './src/assets/js/*.js',
+	image: './src/assets/images/*',
+	libCss: './src/lib/css/*.css',
+	libJs: './src/lib/js/*.js'
 };
 
-gulp.task('initialize', function() {
+const distPath = {
+	// app
+	libCss: './app/assets/css/lib',
+	libJs: './app/assets/js/lib'
+};
 
-	return gulp.src(path.jsLib)
-	.pipe(concat('lib.min.js'))
-	.pipe(gulp.dest('./dist/assets/script/lib'));
-
+// == COMPILE ==
+// minification and concatination of lib files
+gulp.task('style', function() {
+	return gulp.src(srcPath.libCss)
+		.pipe(uglifycss())
+		.pipe(concat('lib.min.css'))
+		.pipe(gulp.dest(distPath.libCss));
 });
 
-gulp.task('serve', function() {
-	gulp.watch(path.jsLib, ['initialize']);
+gulp.task('script', function() {
+	return gulp.src(srcPath.libJs)
+		.pipe(uglify())
+		.pipe(concat('lib.min.js'))
+		.pipe(gulp.dest(distPath.libJs));
 });
+
+gulp.task('compile', ['style'], ['script']);
+

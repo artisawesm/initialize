@@ -1,16 +1,11 @@
 @echo off
-mkdir dist\assets\css\lib;
-mkdir dist\assets\js\lib;
-mkdir dist\assets\fonts;
-mkdir dist\assets\images;
 
-mkdir src\assets\css\lib;
-mkdir src\assets\js\lib;
+mkdir src\assets\scss\partials;
+mkdir src\assets\js\;
 mkdir src\assets\images;
-mkdir src\scss\partials;
+mkdir src\lib\css;
+mkdir src\lib\js;
 
-echo //Main pug file > src\index.pug
-echo //Main scss file > src\scss\main.scss
-echo //Variables scss file > src\scss\partials\_variables.scss
-echo //Constant scss file (for constant elements) > src\scss\partials\_constant.scss
-echo //Main javascript file > src\assets\js\main.js
+echo //Main scss file > src\assets\scss\app.scss
+echo //Variables scss file > src\assets\scss\partials\_variables.scss
+echo //Main javascript file > src\assets\js\app.js
