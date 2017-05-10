@@ -90,7 +90,7 @@ gulp.task('scss', function() {
         	}
         }))
     	.pipe(sourcemaps.init())
-    	.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+    	.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
     	.pipe(rename('app.min.css'))
     	.pipe(sourcemaps.write('.'))
     	.pipe(gulp.dest(appPath.css))
