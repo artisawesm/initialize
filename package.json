@@ -23,7 +23,8 @@
   },
   "scripts": {
     "create": "initialize.bat",
-    "initialize": "gulp initialize",
+    "install:dep": "concurrently \"npm install\" \"bower install\"",
+    "initialize:app": "gulp initialize",
     "compile": "gulp compile",
     "compress": "gulp compress"
   },

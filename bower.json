@@ -1,0 +1,20 @@
+{
+  "name": "initialize",
+  "description": "A web development tool for optimizing the work flow of your projects.",
+  "main": "app.min.js",
+  "authors": [
+    "Art San Diego | asd.artsandiego@gmail.com"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/artisawesm/initialize",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sass": "^3.3.7"
+  }
+}
