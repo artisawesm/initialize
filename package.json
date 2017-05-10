@@ -22,8 +22,7 @@
     "gulp-uglifycss": "^1.0.8"
   },
   "scripts": {
-    // "initialize": "concurrently \"initialize.bat\" \"gulp initialize\""
-    "make:directory": "initialize.bat",
+    "create": "initialize.bat",
     "initialize": "gulp initialize",
     "compile": "gulp compile",
     "compress": "gulp compress"
