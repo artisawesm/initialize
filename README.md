@@ -6,15 +6,16 @@ Web Development tool for optimizing the workflow for your projects.
 `initialize` is your toolkit for optimizing projects as well as your workflow.
 
 # Prerequisite
-- Node.js
+- Node.js (NPM)
+- Bower
 - Ruby (SASS)
 - GIT/GIT Bash
 
 # Installation
-1. Clone or download as zip.
-2. Go to directory where it was cloned then cd to `initialize` folder.
-3. Run `npm install` .
-5. You can now use the command `npm run initialize` to start creating AWESOME stuff!.
+1. Clone the project using GIT or download the zip file then cd to the directory.
+2. Install the necessary dependencies using `npm run install:dep`. This will install bower and npm dependencies.
+3. Run `npm run initialize:app` to start initialize toolkit!
+4. CREATE AWESOME STUFF!
 
 #Commands
 `npm run compile` - Minification and Concatination of JS and CSS files from the library folder.
