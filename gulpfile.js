@@ -86,8 +86,8 @@ gulp.task('style',function(){
             	this.emit('end');
         	}
         }))
-	    .pipe(uglifycss())
 	    .pipe(concat('lib.min.css'))
+	    .pipe(uglifycss())
 	    .pipe(gulp.dest(appPath.libCss));
 });
 
@@ -99,8 +99,8 @@ gulp.task('script',function(){
             	this.emit('end');
         	}
         }))
-	    .pipe(uglify())
 	    .pipe(concat('lib.min.js'))
+	    .pipe(uglify())
 	    .pipe(gulp.dest(appPath.libJs))
 	    .pipe(notify('Compiled!'))
 });
