@@ -15,8 +15,8 @@
 4. CREATE AWESOME STUFF!
 
 # Commands
-`npm run compile:lib` - Minification and Concatination of JS and CSS files from the library folder.
-`npm run compress:img` - Optimization of images.
+1. `npm run compile:lib` - Minification and Concatination of JS and CSS files from the library folder.
+2. `npm run compress:img` - Optimization of images.
 
 # Listen!
 This toolkit is currently under development and it's on its alpha state, but I'm doing my best to apply more functionalities so it can be used in any form of development.
