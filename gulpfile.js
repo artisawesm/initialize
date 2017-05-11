@@ -12,6 +12,7 @@ var sass = require('gulp-sass');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var plumber = require('gulp-plumber');
+var notify = require('gulp-notify');
 
 var srcPath = {
 	// sources
@@ -56,7 +57,8 @@ gulp.task('script',function(){
         }))
 	    .pipe(uglify())
 	    .pipe(concat('lib.min.js'))
-	    .pipe(gulp.dest(appPath.libJs));
+	    .pipe(gulp.dest(appPath.libJs))
+	    .pipe(notify('Compiled!'))
 });
 
 gulp.task('compile', ['style', 'script']);
@@ -76,7 +78,8 @@ gulp.task('compress', function() {
 			progressive: true,
 			optimizationLevel: 5
 		}))
-		.pipe(gulp.dest(appPath.img));
+		.pipe(gulp.dest(appPath.img))
+		.pipe(notify('Optimized!'))
 });
 
 // == SCSS ==
@@ -94,6 +97,7 @@ gulp.task('scss', function() {
     	.pipe(rename('app.min.css'))
     	.pipe(sourcemaps.write('.'))
     	.pipe(gulp.dest(appPath.css))
+    	.pipe(notify('SCSS compiled!'))
     	.pipe(browserSync.stream());
 });
 
@@ -110,6 +114,7 @@ gulp.task('js', function() {
 		.pipe(uglify())
 		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest(appPath.js))
+		.pipe(notify('JS files minified!'))
 		.pipe(browserSync.stream());
 });
 

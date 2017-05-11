@@ -14,19 +14,21 @@
     "gulp-beautify": "^2.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-imageminc": "^3.2.0",
+    "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "gulp-uglifycss": "^1.0.8"
+    "gulp-uglifycss": "^1.0.8",
+    "wiredep": "^4.0.0"
   },
   "scripts": {
     "create": "initialize.bat",
     "install:dep": "concurrently \"npm install\" \"bower install\"",
     "initialize:app": "gulp initialize",
-    "compile": "gulp compile",
-    "compress": "gulp compress"
+    "compile:lib": "gulp compile",
+    "compress:img": "gulp compress"
   },
   "repository": {
     "type": "git",
