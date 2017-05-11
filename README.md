@@ -18,10 +18,9 @@ Web Development tool for optimizing the workflow for your projects.
 4. CREATE AWESOME STUFF!
 
 #Commands
-`npm run compile` - Minification and Concatination of JS and CSS files from the library folder.
-`npm run compress` - Optimization of images.
+`npm run compile:lib` - Minification and Concatination of JS and CSS files from the library folder.
+`npm run compress:img` - Optimization of images.
 
 #Just a few reminder before start using initialize
-This toolkit is currently under develop and it's on its beta state, thus, its capabilities and functions are still on the basic level.
-
+This toolkit is currently under development and it's on its alpha state, but I'mdoing my best to apply more functionalities in this toolkit so it can be used in any form of development.
 # ======================================
