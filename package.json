@@ -1,7 +1,7 @@
 {
   "name": "initialize",
   "version": "1.0.0",
-  "description": "A web development tool for optimizing the work flow of your projects.",
+  "description": "initialize is a web development toolkit for optimizing projects as well as your workflow.",
   "main": "app.js",
   "dependencies": {
     "concurrently": "^3.4.0",
