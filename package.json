@@ -12,8 +12,10 @@
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-beautify": "^2.0.1",
+    "gulp-bower": "0.0.13",
     "gulp-concat": "^2.6.1",
     "gulp-imageminc": "^3.2.0",
+    "gulp-inject": "^4.2.0",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
@@ -25,7 +27,7 @@
   },
   "scripts": {
     "create": "initialize.bat",
-    "install:dep": "concurrently \"npm install\" \"bower install\"",
+    "install:dep": "concurrently \"npm install\" \"bower install\" \"gulp transfer\"",
     "initialize:app": "gulp initialize",
     "compile:lib": "gulp compile",
     "compress:img": "gulp compress"

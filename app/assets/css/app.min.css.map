@@ -1,1 +1,1 @@
-{"version":3,"file":"app.min.css","sources":["app.scss","partials/_variables.scss"],"sourcesContent":["@import \"partials/variables\";","//Variables scss file \r\n"],"names":[],"mappings":""}
+{"version":3,"file":"app.min.css","sources":["app.scss","partials/_variables.scss"],"sourcesContent":["@import \"partials/variables\";\r\n","@font-face {\r\n  font-family: 'AmaticSC';\r\n  src: url('../fonts/initialize/AmaticSC-Regular.ttf') format('truetype');\r\n}"],"names":[],"mappings":"ACAA,UAAU,CACR,WAAW,CAAE,UAAU,CACvB,GAAG,CAAE,+CAA+C,CAAC,kBAAkB"}

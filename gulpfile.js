@@ -13,24 +13,68 @@ var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
 var plumber = require('gulp-plumber');
 var notify = require('gulp-notify');
+var inject = require('gulp-inject');
 
 var srcPath = {
 	// sources
-	scss: './src/assets/scss/**/*.scss',
-	js: './src/assets/js/*.js',
-	img: './src/assets/images/*',
-	libCss: './src/lib/css/*.css',
-	libJs: './src/lib/js/*.js'
+	scss: './resources/assets/scss/**/*.scss',
+	js: './resources/assets/js/*.js',
+	img: './resources/assets/images/*',
+	libCss: './resources/lib/css/*.css',
+	libJs: './resources/lib/js/*.js'
 };
 
 var appPath = {
 	// app
-	css: './app/assets/css/',
-	js: './app/assets/js/',
-	img: './app/assets/images/',
-	libCss: './app/lib/css/',
-	libJs: './app/lib/js/'
+	css: './app/assets/css',
+	js: './app/assets/js',
+	img: './app/assets/images',
+	fonts: './app/assets/fonts',
+	libCss: './app/lib/vendor/css',
+	libJs: './app/lib/vendor/js/',
+	html: './app/index.html',
+	//lib
+	bootstrap: './app/lib/bootstrap',
+	jquery: './app/lib/jquery'
 };
+
+var bower = {
+	jquery: './bower_components/jquery/dist/jquery.min.js',
+	bootstrap: './bower_components/bootstrap/dist/css/bootstrap.min.css',
+	bootstrapJs: './bower_components/bootstrap/dist/js/bootstrap.min.js',
+	bootstrapFonts: './bower_components/bootstrap/dist/fonts/*.*'
+};
+
+// == TRANSFER ==
+gulp.task('jquery', function() {
+    return gulp.src(bower.jquery)
+    	.pipe(gulp.dest(appPath.jquery));
+});
+
+gulp.task('bootstrap', function() {
+    return gulp.src(bower.bootstrap)
+    	.pipe(gulp.dest(appPath.bootstrap + '/css'));
+});
+
+gulp.task('bootstrapJs', function() {
+    return gulp.src(bower.bootstrapJs)
+    	.pipe(gulp.dest(appPath.bootstrap + '/js'));
+});
+
+gulp.task('bootstrapFonts', function() {
+    return gulp.src(bower.bootstrapFonts)
+    	.pipe(gulp.dest(appPath.bootstrap + '/fonts'));
+});
+
+gulp.task('transfer',['jquery', 'bootstrap', 'bootstrapJs', 'bootstrapFonts']);
+
+// == INJECT ==
+// var sources = gulp.src([appPath.jquery + '/*.js', appPath.bootstrap + '/js/*.js', appPath.bootstrap + '/css/*css'],{read:false});
+// gulp.task('inject', function() {
+//     return gulp.src(appPath.html)
+//     	.pipe(inject(sources))
+//     	.pipe(gulp.dest('./app'));
+// });
 
 // == COMPILE ==
 // minification/concatination of lib files
@@ -93,12 +137,17 @@ gulp.task('scss', function() {
         	}
         }))
     	.pipe(sourcemaps.init())
-    	.pipe(sass.sync({outputStyle: 'compressed'}).on('error', sass.logError))
+      	.pipe(sass({
+      		outputStyle: 'compressed'
+        })
+        .on("error", notify.onError(function (error) {
+               return "Error: " + error.message;
+      	})))
     	.pipe(rename('app.min.css'))
     	.pipe(sourcemaps.write('.'))
     	.pipe(gulp.dest(appPath.css))
-    	.pipe(notify('SCSS compiled!'))
-    	.pipe(browserSync.stream());
+    	.pipe(browserSync.stream())
+    	.pipe(notify('SCSS compiled!'));
 });
 
 // == JS ==
