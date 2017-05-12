@@ -19,9 +19,10 @@ var srcPath = {
 	// sources
 	scss: './resources/assets/scss/**/*.scss',
 	js: './resources/assets/js/*.js',
-	img: './resources/assets/images/*',
-	libCss: './resources/lib/css/*.css',
-	libJs: './resources/lib/js/*.js'
+	img: './resources/assets/images/*.*',
+	fonts: './resources/assets/fonts/*.*',
+	libCss: './resources/assets/vendor/css/*.css',
+	libJs: './resources/assets/vendor/js/*.js'
 };
 
 var appPath = {
@@ -30,12 +31,12 @@ var appPath = {
 	js: './app/assets/js',
 	img: './app/assets/images',
 	fonts: './app/assets/fonts',
-	libCss: './app/lib/vendor/css',
-	libJs: './app/lib/vendor/js/',
+	libCss: './app/assets/vendor/css',
+	libJs: './app/assets/vendor/js',
 	html: './app/index.html',
 	//lib
-	bootstrap: './app/lib/bootstrap',
-	jquery: './app/lib/jquery'
+	bootstrap: './app/assets/vendor/bootstrap',
+	jquery: './app/assets/vendor/jquery'
 };
 
 var bower = {
@@ -46,6 +47,7 @@ var bower = {
 };
 
 // == TRANSFER ==
+// transfer default library from bower to app directory
 gulp.task('jquery', function() {
     return gulp.src(bower.jquery)
     	.pipe(gulp.dest(appPath.jquery));

@@ -1,7 +1,7 @@
 {
   "name": "initialize",
   "version": "1.0.0",
-  "description": "initialize is a web development toolkit for optimizing projects as well as your workflow.",
+  "description": "initialize is a lightweight web development toolkit for optimizing projects workflow.",
   "main": "app.js",
   "dependencies": {
     "concurrently": "^3.4.0",
@@ -14,7 +14,7 @@
     "gulp-beautify": "^2.0.1",
     "gulp-bower": "0.0.13",
     "gulp-concat": "^2.6.1",
-    "gulp-imageminc": "^3.2.0",
+    "gulp-imagemin": "^3.2.0",
     "gulp-inject": "^4.2.0",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
@@ -27,8 +27,8 @@
   },
   "scripts": {
     "create": "initialize.bat",
-    "install:dep": "concurrently \"npm install\" \"bower install\" \"gulp transfer\"",
-    "initialize:app": "gulp initialize",
+    "install:dep": "concurrently \"npm install\" \"bower install\"",
+    "initialize:app": "concurrently \"gulp transfer\" \"gulp initialize\"",
     "compile:lib": "gulp compile",
     "compress:img": "gulp compress"
   },

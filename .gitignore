@@ -1,3 +1,5 @@
 #MODULES
 /node_modules
 /bower_components
+!app/**/*
+!resources/**/*
