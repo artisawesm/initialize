@@ -10,6 +10,7 @@ mkdir src\lib\js
 rem app
 mkdir app\assets\css
 mkdir app\assets\js
+mkdir app\assets\fonts
 mkdir app\assets\images
 mkdir app\lib\css
 mkdir app\lib\js
