@@ -1,6 +1,6 @@
 {
   "name": "initialize",
-  "description": "A web development tool for optimizing the work flow of your projects.",
+  "description": "initialize is a lightweight web development toolkit for optimizing projects workflow.",
   "main": "app.min.js",
   "authors": [
     "Art San Diego | asd.artsandiego@gmail.com"
