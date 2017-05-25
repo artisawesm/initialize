@@ -1,3 +1,3 @@
-# CSS libraries and framework should be here
+#css directory
 
-All your third party CSS framework should be placed in this directory.
+Third party CSS libraries should be here. 

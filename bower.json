@@ -1,6 +1,6 @@
 {
   "name": "initialize",
-  "description": "initialize is a lightweight web development toolkit for optimizing projects workflow.",
+  "description": "initialize is a web development boilerplate with automation for optimizing projects workflow.",
   "main": "app.min.js",
   "authors": [
     "Art San Diego | asd.artsandiego@gmail.com"
@@ -15,6 +15,9 @@
     "tests"
   ],
   "dependencies": {
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1",
+    "animate.css": "^3.5.2",
+    "wow": "wowjs#^1.1.2"
   }
 }

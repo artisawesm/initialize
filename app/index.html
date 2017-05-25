@@ -1,15 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="no-js" lang="en">
 <head>
 	<meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
 	<title>Initialize</title>
-	<link rel="stylesheet" href="./assets/vendor/css/lib.min.css">
-	<link rel="stylesheet" href="./assets/vendor/bootstrap/css/bootstrap.min.css">
-	<link rel="stylesheet" href="./assets/css/app.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
+    <meta name="description" content="initialize is a web development boilerplate with automation to help you bootstrap your project.">
+    <meta name="author" content="Art San Diego | asd.artsandiego@gmail.com">
+    <link rel="icon" href="">
+	
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+
+	<!-- animate/wow -->
+	<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
+	<link rel="stylesheet" href="bower_components/wow/dist/wow.min.js">
+	
+	<!-- app.min.css minified -->
+	<link rel="stylesheet" href="assets/css/app.min.css" type="text/css"> 
+	
+	<!-- app.css unminified -->
+	<!-- =========================== -->
+	<!-- <link rel="stylesheet" href="assets/css/app.css" type="text/css"> -->
+	<!-- =========================== -->
+
+	<!-- modernizr -->
+	<script type="text/javascript" src="assets/vendor/modernizr/modernizr.js"></script>
+
 	<style type="text/css">
 		body {
 			box-sizing: border-box;
@@ -34,7 +52,7 @@
 			align-items: center;
 			font-family: "AmaticSC", cursive;
 			text-transform: uppercase;
-			font-size: 150px;
+			font-size: 200px;
 			margin: 0;
 			color: #ecf0f1;
 		}
@@ -48,11 +66,22 @@
 <body>
 	<div class="title">
 		<h1 class="animated bounceInDown" id="title">Initialize</h1>
-		<p class="subtitle">Create awesome stuff!</p>
+		<p>Create awesome stuff!</p>
 	</div>
-	<script src="./assets/vendor/jquery/jquery.min.js"></script>
-	<script src="./assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="./assets/vendor/js/lib.min.js"></script>
-	<script src="./assets/assets/js/app.min.js"></script>
+
+	<!-- jquery -->
+	<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+
+	<!-- bootstrap -->
+	<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+	<!-- app.min.js minified-->
+	<script type="text/javascript" src="assets/js/app.min.js"></script>
+
+	<!-- app.js unminified -->
+	<!-- =========================== -->
+	<!-- <script type="text/javascript" src="assets/js/app.js"></script> -->
+	<!-- =========================== -->
+
 </body>
 </html>

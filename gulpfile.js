@@ -2,6 +2,7 @@
 
 var gulp = require('gulp');
 var browserSync = require('browser-sync').create();
+var clean = require('gulp-clean');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var beautify = require('gulp-beautify');
@@ -17,58 +18,30 @@ var inject = require('gulp-inject');
 
 var srcPath = {
 	// sources
-	scss: './resources/assets/scss/**/*.scss',
-	js: './resources/assets/js/*.js',
-	img: './resources/assets/images/*.*',
-	fonts: './resources/assets/fonts/*.*',
-	libCss: './resources/assets/vendor/css/*.css',
-	libJs: './resources/assets/vendor/js/*.js'
+	img: 'resources/assets/images/*.*',
+	js: 'resources/assets/js/*.js',
+	scss: 'resources/assets/scss/**/*.scss',
+	libCss: 'resources/assets/vendor/css/*.css',
+	libJs: 'resources/assets/vendor/js/*.js'
 };
 
 var appPath = {
 	// app
-	css: './app/assets/css',
-	js: './app/assets/js',
-	img: './app/assets/images',
-	fonts: './app/assets/fonts',
-	libCss: './app/assets/vendor/css',
-	libJs: './app/assets/vendor/js',
-	html: './app/index.html',
-	//lib
-	bootstrap: './app/assets/vendor/bootstrap',
-	jquery: './app/assets/vendor/jquery'
+	css: 'app/assets/css/',
+	fonts: 'app/assets/fonts/',
+	img: 'app/assets/images',
+	js: 'app/assets/js',
+	libCss: 'app/assets/vendor/css/',
+	libJs: 'app/assets/vendor/js/',
+	html: 'app/index.html'
 };
 
-var bower = {
-	jquery: './bower_components/jquery/dist/jquery.min.js',
-	bootstrap: './bower_components/bootstrap/dist/css/bootstrap.min.css',
-	bootstrapJs: './bower_components/bootstrap/dist/js/bootstrap.min.js',
-	bootstrapFonts: './bower_components/bootstrap/dist/fonts/*.*'
-};
-
-// == TRANSFER ==
-// transfer default library from bower to app directory
-gulp.task('jquery', function() {
-    return gulp.src(bower.jquery)
-    	.pipe(gulp.dest(appPath.jquery));
-});
-
-gulp.task('bootstrap', function() {
-    return gulp.src(bower.bootstrap)
-    	.pipe(gulp.dest(appPath.bootstrap + '/css'));
-});
-
-gulp.task('bootstrapJs', function() {
-    return gulp.src(bower.bootstrapJs)
-    	.pipe(gulp.dest(appPath.bootstrap + '/js'));
-});
-
-gulp.task('bootstrapFonts', function() {
-    return gulp.src(bower.bootstrapFonts)
-    	.pipe(gulp.dest(appPath.bootstrap + '/fonts'));
-});
-
-gulp.task('transfer',['jquery', 'bootstrap', 'bootstrapJs', 'bootstrapFonts']);
+// var bower = {
+// 	jquery: './bower_components/jquery/dist/jquery.min.js',
+// 	bootstrap: './bower_components/bootstrap/dist/css/bootstrap.min.css',
+// 	bootstrapJs: './bower_components/bootstrap/dist/js/bootstrap.min.js',
+// 	bootstrapFonts: './bower_components/bootstrap/dist/fonts/*.*'
+// };
 
 // == INJECT ==
 // var sources = gulp.src([appPath.jquery + '/*.js', appPath.bootstrap + '/js/*.js', appPath.bootstrap + '/css/*css'],{read:false});
@@ -77,6 +50,30 @@ gulp.task('transfer',['jquery', 'bootstrap', 'bootstrapJs', 'bootstrapFonts']);
 //     	.pipe(inject(sources))
 //     	.pipe(gulp.dest('./app'));
 // });
+
+// == TRANSFER ==
+// gulp.task('jquery', function() {
+//     return gulp.src(bower.jquery)
+//     	.pipe(gulp.dest(appPath.jquery));
+// });
+
+// gulp.task('bootstrap', function() {
+//     return gulp.src(bower.bootstrap)
+//     	.pipe(gulp.dest(appPath.bootstrap + '/css'));
+// });
+
+// gulp.task('bootstrapJs', function() {
+//     return gulp.src(bower.bootstrapJs)
+//     	.pipe(gulp.dest(appPath.bootstrap + '/js'));
+// });
+
+// gulp.task('bootstrapFonts', function() {
+//     return gulp.src(bower.bootstrapFonts)
+//     	.pipe(gulp.dest(appPath.bootstrap + '/fonts'));
+// });
+
+// gulp.task('transfer',['jquery', 'bootstrap', 'bootstrapJs', 'bootstrapFonts']);
+
 
 // == COMPILE ==
 // minification/concatination of lib files
@@ -104,7 +101,7 @@ gulp.task('script',function(){
 	    .pipe(concat('lib.min.js'))
 	    .pipe(uglify())
 	    .pipe(gulp.dest(appPath.libJs))
-	    .pipe(notify('Compiled!'))
+	    .pipe(notify('Libraries Compiled!'))
 });
 
 gulp.task('compile', ['style', 'script']);
@@ -124,13 +121,14 @@ gulp.task('compress', function() {
 			progressive: true,
 			optimizationLevel: 5
 		}))
+		.pipe(clean())
 		.pipe(gulp.dest(appPath.img))
-		.pipe(notify('Optimized!'))
+		.pipe(notify('Images Optimized!'))
 });
 
 // == SCSS ==
 // scss compiler
-gulp.task('scss', function() {
+gulp.task('scss-minified', function() {
     return gulp.src(srcPath.scss)
 		.pipe(plumber({
 				handleError: function (err) {
@@ -139,22 +137,33 @@ gulp.task('scss', function() {
         	}
         }))
     	.pipe(sourcemaps.init())
-      	.pipe(sass({
-      		outputStyle: 'compressed'
-        })
-        .on("error", notify.onError(function (error) {
+      	.pipe(sass().on("error", notify.onError(function (error) {
                return "Error: " + error.message;
       	})))
+    	.pipe(autoprefixer())
+      	.pipe(uglifycss())
     	.pipe(rename('app.min.css'))
     	.pipe(sourcemaps.write('.'))
     	.pipe(gulp.dest(appPath.css))
     	.pipe(browserSync.stream())
-    	.pipe(notify('SCSS compiled!'));
 });
+
+gulp.task('scss-unminified', function() {
+    return gulp.src(srcPath.scss)
+      	.pipe(sass().on("error", notify.onError(function (error) {
+           return "Error: " + error.message;
+      	})))
+      	.pipe(rename('app.css'))
+    	.pipe(gulp.dest(appPath.css))
+    	.pipe(browserSync.stream())
+    	.pipe(notify({message: 'SCSS Compiled!', onlast: true}));
+});
+
+gulp.task('scss',['scss-minified', 'scss-unminified']);
 
 // == JS ==
 // js minification
-gulp.task('js', function() {
+gulp.task('js-minified', function() {
 	return gulp.src(srcPath.js)
 		.pipe(plumber({
 				handleError: function (err) {
@@ -165,9 +174,18 @@ gulp.task('js', function() {
 		.pipe(uglify())
 		.pipe(rename('app.min.js'))
 		.pipe(gulp.dest(appPath.js))
-		.pipe(notify('JS files minified!'))
 		.pipe(browserSync.stream());
 });
+
+gulp.task('js-unminified', function() {
+	return gulp.src(srcPath.js)
+		.pipe(rename('app.js'))
+		.pipe(gulp.dest(appPath.js))
+		.pipe(browserSync.stream())
+    	.pipe(notify({message: 'Js Compiled!', onlast: true}));
+});
+
+gulp.task('js',['js-minified', 'js-unminified']);
 
 gulp.task('initialize', function() {
 

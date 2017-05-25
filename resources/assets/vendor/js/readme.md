@@ -1,3 +1,3 @@
-# JS libraries and framework should be here
+#js directory
 
-All your third party JS framework should be placed in this directory.
+Third party JS libraries should be here.
