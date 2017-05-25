@@ -7,6 +7,7 @@
 - [NodeJS](https://nodejs.org/en/) for NPM
 - [Bower](https://bower.io/)
 - [Ruby](https://www.ruby-lang.org/en/) for SASS/SCSS
+- [GulpJS](http://gulpjs.com/)
 - [GIT/GIT Bash](https://git-scm.com/downloads)
 
 initialize is using preprocessor (SCSS) by default, but you can always modify the `app.css` file in `app/assets/css` directory.
