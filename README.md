@@ -10,8 +10,7 @@
 - [GIT/GIT Bash](https://git-scm.com/downloads)
 
 initialize is using preprocessor (SCSS) by default, but you can always modify the `app.css` file in `app/assets/css` directory.
-
-But it is highly recommended to use SCSS.
+But it is highly recommended to use [SCSS](http://sass-lang.com/install).
 
 # Installation
 1. Clone the project using GIT or download the zip file then cd to the directory.
