@@ -19,6 +19,7 @@ But it is highly recommended to use [SCSS](http://sass-lang.com/install).
 4. CREATE AWESOME STUFF!
 
 # Commands
+
 1. initialize      - start initialize
 2. initialize:dep  - install npm and bower dependencies
 3. initialize:lib  - compile/minify libraries into a single minified file
