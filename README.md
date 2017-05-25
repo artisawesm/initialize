@@ -3,10 +3,15 @@
 `initialize` is a web development boilerplate with automation to help you bootstrap your project.
 
 # Prerequisite
+
 - [NodeJS](https://nodejs.org/en/) for NPM
 - [Bower](https://bower.io/)
 - [Ruby](https://www.ruby-lang.org/en/) for SASS/SCSS
 - [GIT/GIT Bash](https://git-scm.com/downloads)
+
+initialize is using preprocessor (SCSS) by default, but you can always modify the `app.css` file in `app/assets/css` directory.
+
+But it is highly recommended to use SCSS.
 
 # Installation
 1. Clone the project using GIT or download the zip file then cd to the directory.
@@ -23,6 +28,8 @@
 6. initialize:?    - help menu
 
 # Listen!
-This toolkit is currently under development and it's on its alpha state, but I'm doing my best to apply more functionalities so it can be used in any form of development.
+This toolkit is currently under development and it's on its alpha state, but I'm doing my best to integrate more functionalities that can make this toolkit usable in any web development situation.
+
+I'm open for suggestions!
 
 # ======================================
