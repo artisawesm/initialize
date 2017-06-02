@@ -9,6 +9,7 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
+    "concurrently": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-beautify": "^2.0.1",
@@ -27,7 +28,7 @@
   },
   "scripts": {
     "initialize": "gulp initialize",
-    "initialize:dep": "concurrently \"npm install\" \"bower install\"",
+    "initialize:dep": "concurrently \"bower install\" \"npm install\"",
     "initialize:lib": "gulp compile",
     "initialize:img": "gulp compress",
     "initialize:help": "initialize.bat",
