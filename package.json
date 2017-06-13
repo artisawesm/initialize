@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "browser-sync": "^2.18.8",
-    "concurrently": "^3.4.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-beautify": "^2.0.1",
@@ -17,27 +16,24 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^3.2.0",
-    "gulp-inject": "^4.2.0",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "gulp-uglifycss": "^1.0.8"
+    "gulp-uglifycss": "^1.0.8",
+    "vinyl-ftp": "^0.6.0"
   },
   "scripts": {
-    "initialize": "gulp initialize",
-    "initialize:dep": "concurrently \"bower install\" \"npm install\"",
-    "initialize:lib": "gulp compile",
-    "initialize:img": "gulp compress",
+    "initialize": "gulp",
+    "initialize:install": "concurrently \"yarn install\" \"bower install\"",
+    "initialize:compile": "gulp compile",
+    "initialize:optimize": "gulp optimize",
     "initialize:help": "initialize.bat",
     "initialize:?": "initialize.bat"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/artisawesm/initialize.git"
-  },
+  "repository": "git+https://github.com/artisawesm/initialize.git",
   "author": "Art San Diego | asd.artsandiego@gmail.com",
   "license": "MIT",
   "bugs": {
