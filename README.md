@@ -1,9 +1,10 @@
- initialize
-`initialize` is a web development boilerplate with automation to help you bootstrap your project.
+# initialize
+`initialize` (Temporary name) is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.
 
 # Prerequisite
 
 - [NodeJS](https://nodejs.org/en/) for NPM
+- [Yarn](https://yarnpkg.com/en/)
 - [Bower](https://bower.io/)
 - [Ruby](https://www.ruby-lang.org/en/) for SASS/SCSS
 - [GulpJS](http://gulpjs.com/)

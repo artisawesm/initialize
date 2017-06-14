@@ -15,6 +15,7 @@ var uglifycss 		= require('gulp-uglifycss');
 var plumber 		= require('gulp-plumber');
 var notify 			= require('gulp-notify');
 var ftp 			= require('vinyl-ftp');
+var mainBowerFiles 	= require('gulp-main-bower-files');
 
 var srcPath = {
 	// sources
@@ -44,18 +45,37 @@ var appPath = {
 var ftpHost = 'kestrel.ph'; //set your site's url
 var ftpUser = 'user@kestrel.ph'; //ftp username access
 var ftpPassword = 'Y3llowb3ll@'; //ftp password access
-var ftpDestination = '/staging/insular2016/assets/'; //set the destination *you can add multiple destination if you want*
-var ftpSource = 'app/sample.txt'; //assets that you will upload to the live site
+var ftpDestination = '/staging/insular2016/sampleftpdirectory'; //set the destination
 gulp.task('ftp', function () {
 	var conn = ftp.create( {
 		host:     ftpHost, 
 		user:     ftpUser,
-		password: ftpPassword
+		password: ftpPassword,
+		parallel: 10
 	});
-	return gulp.src(ftpSource)
+
+	var files = [ //files to upload
+		'app/assets/css/**',
+		'app/assets/js/**',
+		'app/*.html'
+	];
+
+	return gulp.src(files, { base: '.', buffer: false })
 		.pipe(conn.newer(ftpDestination))
-		.pipe(conn.dest(ftpDestination));
+		.pipe(conn.dest(ftpDestination))
+		.pipe(notify({
+    		title: 'Deployment',
+    		message: 'Files were successfully uploaded to FTP',
+    		onLast: true
+    	}));
 });
+
+// == MAINBOWER ==
+// gulp.task('mainBowerFiles', function() {
+//     return gulp.src('./bower.json')
+//     	.pipe(mainBowerFiles())
+//     	.pipe(gulp.dest('app/from_bower'));
+// });
 
 // == UNMINIFIED ==
 gulp.task('unminified',['scss-unminified', 'js-unminified']);

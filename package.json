@@ -1,10 +1,9 @@
 {
   "name": "initialize",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "initialize is a web development boilerplate with automation for optimizing projects workflow.",
   "main": "app.js",
   "dependencies": {
-    "concurrently": "^3.4.0",
     "gulp": "^3.9.1"
   },
   "devDependencies": {
@@ -16,6 +15,7 @@
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^3.2.0",
+    "gulp-main-bower-files": "^1.6.2",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "initialize": "gulp",
-    "initialize:install": "concurrently \"yarn install\" \"bower install\"",
+    "initialize:install": "yarn install && bower install",
     "initialize:compile": "gulp compile",
     "initialize:optimize": "gulp optimize",
     "initialize:help": "initialize.bat",
@@ -35,7 +35,7 @@
   },
   "repository": "git+https://github.com/artisawesm/initialize.git",
   "author": "Art San Diego | asd.artsandiego@gmail.com",
-  "license": "MIT",
+  "license": "Apache",
   "bugs": {
     "url": "https://github.com/artisawesm/initialize/issues"
   },
