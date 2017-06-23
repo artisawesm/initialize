@@ -42,10 +42,10 @@ var appPath = {
 //==========================================================================
 // == FTP ==
 //This task will transfer your local files to your live site via FTP
-var ftpHost = 'kestrel.ph'; //set your site's url
-var ftpUser = 'user@kestrel.ph'; //ftp username access
-var ftpPassword = 'Y3llowb3ll@'; //ftp password access
-var ftpDestination = '/staging/insular2016/sampleftpdirectory'; //set the destination
+var ftpHost = ''; //set your site's url
+var ftpUser = ''; //ftp username access
+var ftpPassword = ''; //ftp password access
+var ftpDestination = ''; //set the destination
 gulp.task('ftp', function () {
 	var conn = ftp.create( {
 		host:     ftpHost, 
