@@ -27,7 +27,6 @@ To use the commands simply type `npm run` followed by the command. i.e. `npm run
 5. initialize:help      : display commands
 6. initialize:?         : display commands
 
-# Listen!
-This toolkit is currently under development and it's on its alpha state, but I'm doing my best to integrate more functionalities that can make this toolkit usable in any web development situation.
-
-I'm open for suggestions!
+# Hey Listen!
+I'm new to these stuff, but it really excites me to develop something that will help my fellow developers,
+all suggestions are welcome! <asd.artsandiego@gmail.com>
