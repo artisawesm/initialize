@@ -1,36 +1,33 @@
 # initialize
-`initialize` (Temporary name) is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.
+`initialize` (temporary name) is a web development toolkit that provides boilerplate and also automates your workflow to help you bootstrap your projects.
 
 # Prerequisite
-
-- [NodeJS](https://nodejs.org/en/) for NPM
+- [NodeJS](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/en/)
 - [Bower](https://bower.io/)
-- [Ruby](https://www.ruby-lang.org/en/) for SASS/SCSS
+- [Ruby](https://www.ruby-lang.org/en/)
 - [GulpJS](http://gulpjs.com/)
 - [GIT/GIT Bash](https://git-scm.com/downloads)
 
-initialize is using preprocessor (SCSS) by default, but you can always modify the `app.css` file in `app/assets/css` directory.
-But it is highly recommended to use [SCSS](http://sass-lang.com/install).
+# Note
+initialize is using preprocessor (SCSS) by default, but you can always modify the `app.css` file in `app/assets/css` directory, however it is highly recommended to use [SCSS](http://sass-lang.com/install).
 
-# Installation
-1. Clone the project using GIT or download the zip file then cd to the directory.
-2. Install the necessary dependencies using `npm run initialize:dep`. This will install bower and npm dependencies.
-3. Run `npm run initialize` to start initialize!
-4. CREATE AWESOME STUFF!
+# Installation (4 easy steps)
+1. Open your terminal and clone the project then `cd` to the directory.
+2. Install all the necessary dependencies using `npm run initialize:install`.
+3. To start initialize simply type `npm run initialize` on your terminal.
+4. Be AWESOME!
 
 # Commands
-
-1. initialize      - start initialize
-2. initialize:dep  - install npm and bower dependencies
-3. initialize:lib  - compile/minify libraries into a single minified file
-4. initialize:img  - optimize images
-5. initialize:help - help menu
-6. initialize:?    - help menu
+To use the commands simply type `npm run` followed by the command. i.e. `npm run initialize:help`
+1. initialize           : start initialize
+2. initialize:install   : install dependencies
+3. initialize:compile   : compile and minify libraries into a single `lib.min.js` and `lib.min.css` file
+4. initialize:optimize  : optimize images `PNG, JPG, SVG`
+5. initialize:help      : display commands
+6. initialize:?         : display commands
 
 # Listen!
 This toolkit is currently under development and it's on its alpha state, but I'm doing my best to integrate more functionalities that can make this toolkit usable in any web development situation.
 
 I'm open for suggestions!
-
-# ======================================
