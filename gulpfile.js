@@ -37,6 +37,18 @@ var appPath = {
 	html: 'app/*.html'
 };
 
+var autoprefixer_browsers = [
+	'ie >= 10',
+    'ie_mob >= 10',
+    'ff >= 30',
+    'chrome >= 34',
+    'safari >= 7',
+    'opera >= 23',
+    'ios >= 7',
+    'android >= 4.4',
+    'bb >= 10'
+];
+
 //==========================================================================
 // EXTERNAL TASKS -> Optional tasks, tasks that doesn't need to be automated
 //==========================================================================
@@ -87,8 +99,19 @@ gulp.task('scss-unminified', function() {
       	}).on('error', notify.onError(function (error) {
       		return 'Error in SASS!: ' + error.message;
       	})))
-      	.pipe(autoprefixer({
-			browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+		.pipe(autoprefixer({
+			browsers: [
+				'last 2 versions',
+				'ie >= 10',
+				'ie_mob >= 10',
+				'ff >= 30',
+				'chrome >= 34',
+				'safari >= 7',
+				'opera >= 23',
+				'ios >= 7',
+				'android >= 4.4',
+				'bb >= 10'
+			]
 		}))
       	.pipe(rename('app.css'))
     	.pipe(gulp.dest(appPath.css))
@@ -174,7 +197,18 @@ gulp.task('scss', function() {
       		return 'Error in SASS!: ' + error.message;
       	})))
     	.pipe(autoprefixer({
-			browsers: ['last 2 versions', '> 5%', 'Firefox ESR']
+			browsers: [
+				'last 2 versions',
+				'ie >= 10',
+				'ie_mob >= 10',
+				'ff >= 30',
+				'chrome >= 34',
+				'safari >= 7',
+				'opera >= 23',
+				'ios >= 7',
+				'android >= 4.4',
+				'bb >= 10'
+			]
 		}))
     	.pipe(rename('app.min.css'))
     	.pipe(sourcemaps.write('.'))

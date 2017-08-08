@@ -30,6 +30,7 @@
     "initialize:install": "yarn install && bower install",
     "initialize:compile": "gulp compile",
     "initialize:optimize": "gulp optimize",
+    "initialize:unminified": "gulp unminified",
     "initialize:help": "initialize.bat",
     "initialize:?": "initialize.bat"
   },
