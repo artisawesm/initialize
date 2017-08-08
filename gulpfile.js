@@ -1,25 +1,25 @@
 'use strict';
 
-var gulp 			= require('gulp');
-var browserSync 	= require('browser-sync').create();
-var clean 			= require('gulp-clean');
-var autoprefixer 	= require('gulp-autoprefixer');
-var sourcemaps 		= require('gulp-sourcemaps');
-var beautify 		= require('gulp-beautify');
-var concat 			= require('gulp-concat');
-var imagemin 		= require('gulp-imagemin');
-var rename 			= require('gulp-rename');
-var sass 			= require('gulp-sass');
-var uglify 			= require('gulp-uglify');
-var uglifycss 		= require('gulp-uglifycss');
-var plumber 		= require('gulp-plumber');
-var notify 			= require('gulp-notify');
-var ftp 			= require('vinyl-ftp');
-var mainBowerFiles 	= require('gulp-main-bower-files');
+var gulp 			= require('gulp'),
+	browserSync 	= require('browser-sync').create(),
+	clean 			= require('gulp-clean'),
+	autoprefixer 	= require('gulp-autoprefixer'),
+	sourcemaps 		= require('gulp-sourcemaps'),
+	beautify 		= require('gulp-beautify'),
+	concat 			= require('gulp-concat'),
+	imagemin 		= require('gulp-imagemin'),
+	rename 			= require('gulp-rename'),
+	sass 			= require('gulp-sass'),
+	uglify 			= require('gulp-uglify'),
+	uglifycss 		= require('gulp-uglifycss'),
+	plumber 		= require('gulp-plumber'),
+	notify 			= require('gulp-notify'),
+	ftp 			= require('vinyl-ftp'),
+	mainBowerFiles 	= require('gulp-main-bower-files')
 
 var srcPath = {
 	// sources
-	img: 'resources/assets/images/*.*',
+	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}',
 	js: 'resources/assets/js/*.js',
 	scss: 'resources/assets/scss/**/*.scss',
 	libCss: 'resources/assets/vendor/css/*.css',
@@ -27,7 +27,7 @@ var srcPath = {
 };
 
 var appPath = {
-	// app
+	// app destination
 	css: 'app/assets/css/',
 	fonts: 'app/assets/fonts/',
 	img: 'app/assets/images',
@@ -106,14 +106,29 @@ gulp.task('js-unminified', function() {
     	}));
 });
 
-// == OPTIMIZE ==
+// == IMAGE OPTIMIZE ==
 gulp.task('optimize', function() {
 	return gulp.src(srcPath.img)
-		.pipe(imagemin({
-			interlaced: true,
-			progressive: true,
-			optimizationLevel: 5
-		}))
+		.pipe(imagemin([
+			imagemin.gifsicle({
+				interlaced: true
+			}),
+			imagemin.jpegtran({
+				progressive: true,
+				quality: 80
+			}),
+			imagemin.optipng({
+				optimizationLevel: 7
+			}),
+			imagemin.svgo({
+				plugins: [{
+					removeViewBox: true,
+					removeEmptyAttrs: true,
+					removeMetadata: true,
+					removeUselessStrokeAndFill: true
+				}]
+			})
+		]))
 		.pipe(clean())
 		.pipe(gulp.dest(appPath.img))
 		.pipe(notify({
