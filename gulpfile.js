@@ -18,7 +18,8 @@ var srcPath = { // sources
 	js: 'resources/assets/js/*.js',
 	scss: 'resources/assets/scss/**/*.scss',
 	libCss: 'resources/assets/vendor/css/*.css',
-	libJs: 'resources/assets/vendor/js/*.js'
+	libJs: 'resources/assets/vendor/js/*.js',
+	fonts: './resources/assets/fonts/*.*'
 };
 
 var appPath = { // app destination
@@ -28,8 +29,7 @@ var appPath = { // app destination
 	js: 'app/assets/js',
 	libCss: 'app/assets/vendor/css/',
 	libJs: 'app/assets/vendor/js/',
-	html: 'app/*.html',
-	test: 'app/test/'
+	html: 'app/*.html'
 };
 
 //==========================================================================
@@ -64,15 +64,6 @@ gulp.task('ftp', function () {
     		onLast: true
     	}));
 });
-
-// == MAINBOWER ==
-// var mainBowerFiles = require('gulp-main-bower-files');
-// gulp.task('mainbower', function() {
-//     return gulp.src('./bower.json')
-// 		.pipe(mainBowerFiles())
-// 		.pipe($.uglify())
-//     	.pipe(gulp.dest('app/from_bower'));
-// });
 
 // == UNMINIFIED ==
 gulp.task('unminified',['scss-unminified', 'js-unminified']);
@@ -224,13 +215,21 @@ gulp.task('js', function() {
     	}));
 });
 
+// == FONTS ==
+// transfering fonts from source to app folder
+gulp.task('fonts', function(){
+	return gulp.src(srcPath.fonts)
+		.pipe(gulp.dest(appPath.fonts));
+});
+
 gulp.task('initialize', function() {
 	browserSync.init({
 		server: 'app/'
 	});
 
     gulp.watch(srcPath.scss, ['scss']);
-    gulp.watch(srcPath.js, ['js']);
+	gulp.watch(srcPath.js, ['js']);
+	gulp.watch(srcPath.fonts, ['fonts']);
     gulp.watch('app/*.html').on('change', browserSync.reload);
 });
 
