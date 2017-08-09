@@ -66,14 +66,13 @@ gulp.task('ftp', function () {
 });
 
 // == MAINBOWER ==
-var bowerme = require('gulp-main-bower-files');
-
-gulp.task('mainbower', function() {
-    return gulp.src('./bower.json')
-		.pipe(bowerme())
-		.pipe($.filter('**/*.js'))
-    	.pipe(gulp.dest('app/from_bower'));
-});
+// var mainBowerFiles = require('gulp-main-bower-files');
+// gulp.task('mainbower', function() {
+//     return gulp.src('./bower.json')
+// 		.pipe(mainBowerFiles())
+// 		.pipe($.uglify())
+//     	.pipe(gulp.dest('app/from_bower'));
+// });
 
 // == UNMINIFIED ==
 gulp.task('unminified',['scss-unminified', 'js-unminified']);
