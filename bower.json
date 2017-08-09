@@ -1,7 +1,7 @@
 {
   "name": "initialize",
   "description": "initialize is a web development boilerplate with automation for optimizing projects workflow.",
-  "main": "app.js",
+  "main": "main.js",
   "authors": [
     "Art San Diego | asd.artsandiego@gmail.com"
   ],

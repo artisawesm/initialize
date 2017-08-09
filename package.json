@@ -2,7 +2,7 @@
   "name": "initialize",
   "version": "1.2.0",
   "description": "initialize is a web development boilerplate with automation for optimizing projects workflow.",
-  "main": "app.js",
+  "main": "main.js",
   "dependencies": {
     "gulp": "^3.9.1"
   },
@@ -14,7 +14,9 @@
     "gulp-bower": "0.0.13",
     "gulp-clean": "^0.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-filter": "^5.0.1",
     "gulp-imagemin": "^3.3.0",
+    "gulp-load-plugins": "^1.5.0",
     "gulp-main-bower-files": "^1.6.2",
     "gulp-notify": "^3.0.0",
     "gulp-plumber": "^1.1.0",

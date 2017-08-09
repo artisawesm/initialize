@@ -1,24 +1,19 @@
 'use strict';
 
-var gulp 			= require('gulp'),
-	browserSync 	= require('browser-sync').create(),
-	clean 			= require('gulp-clean'),
-	autoprefixer 	= require('gulp-autoprefixer'),
-	sourcemaps 		= require('gulp-sourcemaps'),
-	beautify 		= require('gulp-beautify'),
-	concat 			= require('gulp-concat'),
-	imagemin 		= require('gulp-imagemin'),
-	rename 			= require('gulp-rename'),
-	sass 			= require('gulp-sass'),
-	uglify 			= require('gulp-uglify'),
-	uglifycss 		= require('gulp-uglifycss'),
-	plumber 		= require('gulp-plumber'),
-	notify 			= require('gulp-notify'),
-	ftp 			= require('vinyl-ftp'),
-	mainBowerFiles 	= require('gulp-main-bower-files')
+var gulp 		= require('gulp'),
+	browserSync = require('browser-sync').create();
+	
+var $ = require('gulp-load-plugins')({
+		camelize: true,
+		pattern: [
+			'gulp-*',
+			'gulp.*',
+			'main-bower-files'
+		],
+		replaceString: /\bgulp[\-.]/
+	});
 
-var srcPath = {
-	// sources
+var srcPath = { // sources
 	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}',
 	js: 'resources/assets/js/*.js',
 	scss: 'resources/assets/scss/**/*.scss',
@@ -26,28 +21,16 @@ var srcPath = {
 	libJs: 'resources/assets/vendor/js/*.js'
 };
 
-var appPath = {
-	// app destination
+var appPath = { // app destination
 	css: 'app/assets/css/',
 	fonts: 'app/assets/fonts/',
 	img: 'app/assets/images',
 	js: 'app/assets/js',
 	libCss: 'app/assets/vendor/css/',
 	libJs: 'app/assets/vendor/js/',
-	html: 'app/*.html'
+	html: 'app/*.html',
+	test: 'app/test/'
 };
-
-var autoprefixer_browsers = [
-	'ie >= 10',
-    'ie_mob >= 10',
-    'ff >= 30',
-    'chrome >= 34',
-    'safari >= 7',
-    'opera >= 23',
-    'ios >= 7',
-    'android >= 4.4',
-    'bb >= 10'
-];
 
 //==========================================================================
 // EXTERNAL TASKS -> Optional tasks, tasks that doesn't need to be automated
@@ -83,23 +66,26 @@ gulp.task('ftp', function () {
 });
 
 // == MAINBOWER ==
-// gulp.task('mainBowerFiles', function() {
-//     return gulp.src('./bower.json')
-//     	.pipe(mainBowerFiles())
-//     	.pipe(gulp.dest('app/from_bower'));
-// });
+var bowerme = require('gulp-main-bower-files');
+
+gulp.task('mainbower', function() {
+    return gulp.src('./bower.json')
+		.pipe(bowerme())
+		.pipe($.filter('**/*.js'))
+    	.pipe(gulp.dest('app/from_bower'));
+});
 
 // == UNMINIFIED ==
 gulp.task('unminified',['scss-unminified', 'js-unminified']);
 gulp.task('scss-unminified', function() {
     return gulp.src(srcPath.scss)
-      	.pipe(sass({
+      	.pipe($.sass({
       		outputStyle: 'expanded', 
       		errLogToConsole: true
-      	}).on('error', notify.onError(function (error) {
+      	}).on('error', $.notify.onError(function (error) {
       		return 'Error in SASS!: ' + error.message;
       	})))
-		.pipe(autoprefixer({
+		.pipe($.autoprefixer({
 			browsers: [
 				'last 2 versions',
 				'ie >= 10',
@@ -113,37 +99,37 @@ gulp.task('scss-unminified', function() {
 				'bb >= 10'
 			]
 		}))
-      	.pipe(rename('app.css'))
+      	.pipe($.rename('app.css'))
     	.pipe(gulp.dest(appPath.css))
     	.pipe(browserSync.stream())
 });
 gulp.task('js-unminified', function() {
 	return gulp.src(srcPath.js)
-		.pipe(rename('app.js'))
+		.pipe($.rename('app.js'))
 		.pipe(gulp.dest(appPath.js))
 		.pipe(browserSync.stream())
-    	.pipe(notify({
+    	.pipe($.notify({
     		title: 'JS|CSS',
     		message: 'You\'ve successfully generated unminified JS and CSS files.',
     		onLast: true
     	}));
 });
 
-// == IMAGE OPTIMIZE ==
+// == OPTIMIZE ==
 gulp.task('optimize', function() {
 	return gulp.src(srcPath.img)
-		.pipe(imagemin([
-			imagemin.gifsicle({
+		.pipe($.imagemin([
+			$.imagemin.gifsicle({
 				interlaced: true
 			}),
-			imagemin.jpegtran({
+			$.imagemin.jpegtran({
 				progressive: true,
 				quality: 80
 			}),
-			imagemin.optipng({
+			$.imagemin.optipng({
 				optimizationLevel: 7
 			}),
-			imagemin.svgo({
+			$.imagemin.svgo({
 				plugins: [{
 					removeViewBox: true,
 					removeEmptyAttrs: true,
@@ -152,9 +138,9 @@ gulp.task('optimize', function() {
 				}]
 			})
 		]))
-		.pipe(clean())
+		.pipe($.clean())
 		.pipe(gulp.dest(appPath.img))
-		.pipe(notify({
+		.pipe($.notify({
     		title: 'Images',
     		message: 'Images optimized!',
     		onLast: true
@@ -165,18 +151,18 @@ gulp.task('optimize', function() {
 gulp.task('compile', ['style', 'script']);
 gulp.task('style',function(){
     return gulp.src(srcPath.libCss)
-		.pipe(plumber())
-	    .pipe(concat('lib.min.css'))
-	    .pipe(uglifycss())
+		.pipe($.plumber())
+	    .pipe($.concat('lib.min.css'))
+	    .pipe($.uglifycss())
 	    .pipe(gulp.dest(appPath.libCss));
 });
 gulp.task('script',function(){
     return gulp.src(srcPath.libJs)
-		.pipe(plumber())
-	    .pipe(concat('lib.min.js'))
-	    .pipe(uglify())
+		.pipe($.plumber())
+	    .pipe($.concat('lib.min.js'))
+	    .pipe($.uglify())
 	    .pipe(gulp.dest(appPath.libJs))
-	    .pipe(notify({
+	    .pipe($.notify({
     		title: 'CSS|JS Libraries',
     		message: 'Vendor libraries compiled!',
     		onLast: true
@@ -189,14 +175,14 @@ gulp.task('script',function(){
 // scss compiler/uglifier
 gulp.task('scss', function() {
     return gulp.src(srcPath.scss)
-    	.pipe(sourcemaps.init())
-      	.pipe(sass({
+    	.pipe($.sourcemaps.init())
+      	.pipe($.sass({
       		outputStyle: 'compressed', 
       		errLogToConsole: true
-      	}).on('error', notify.onError(function (error) {
+      	}).on('error', $.notify.onError(function (error) {
       		return 'Error in SASS!: ' + error.message;
       	})))
-    	.pipe(autoprefixer({
+    	.pipe($.autoprefixer({
 			browsers: [
 				'last 2 versions',
 				'ie >= 10',
@@ -210,11 +196,11 @@ gulp.task('scss', function() {
 				'bb >= 10'
 			]
 		}))
-    	.pipe(rename('app.min.css'))
-    	.pipe(sourcemaps.write('.'))
+    	.pipe($.rename('app.min.css'))
+    	.pipe($.sourcemaps.write('.'))
     	.pipe(gulp.dest(appPath.css))
     	.pipe(browserSync.stream())
-    	.pipe(notify({
+    	.pipe($.notify({
     		title: 'CSS',
     		message: 'SCSS files compiled!',
     		onLast: true
@@ -225,14 +211,14 @@ gulp.task('scss', function() {
 // js minification
 gulp.task('js', function() {
 	return gulp.src(srcPath.js)
-		.pipe(plumber())
-		.pipe(sourcemaps.init())
-		.pipe(uglify())
-		.pipe(rename('app.min.js'))
-		.pipe(sourcemaps.write('.'))
+		.pipe($.plumber())
+		.pipe($.sourcemaps.init())
+		.pipe($.uglify())
+		.pipe($.rename('app.min.js'))
+		.pipe($.sourcemaps.write('.'))
 		.pipe(gulp.dest(appPath.js))
 		.pipe(browserSync.stream())
-		.pipe(notify({
+		.pipe($.notify({
     		title: 'JS',
     		message: 'JS files compiled!',
     		onLast: true
