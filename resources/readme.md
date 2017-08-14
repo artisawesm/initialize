@@ -1,3 +1,3 @@
-# resources directory
+# Resources directory
 
-This is where all the modification will happen
+This is where all the modification will happen.

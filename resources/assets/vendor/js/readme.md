@@ -1,3 +1,3 @@
-#js directory
+# Resources - Vendor JS directory
 
-Third party JS libraries should be here.
+Vendor JS files should be placed here

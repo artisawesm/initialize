@@ -1,3 +1,3 @@
-#css directory
+# Resources - Vendor CSS directory
 
-Third party CSS libraries should be here. 
+Vendor CSS files should be placed here
