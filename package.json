@@ -1,20 +1,20 @@
 {
   "name": "initialize",
-  "version": "1.2.0",
-  "description": "initialize is a web development boilerplate with automation for optimizing projects workflow.",
-  "main": "main.js",
-  "dependencies": {
-    "gulp": "^3.9.1"
-  },
+  "version": "2.0.0",
+  "description": "initialize is a front end web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.",
+  "main": "app.js",
+  "dependencies": {},
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "bootstrap": "^4.0.0",
     "browser-sync": "^2.18.13",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
     "gulp-beautify": "^2.0.1",
-    "gulp-bower": "0.0.13",
     "gulp-clean": "^0.3.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-filter": "^5.0.1",
     "gulp-imagemin": "^3.3.0",
     "gulp-load-plugins": "^1.5.0",
     "gulp-notify": "^3.0.0",
@@ -23,21 +23,21 @@
     "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-uglify": "^2.1.2",
-    "gulp-uglifycss": "^1.0.8",
-    "main-bower-files": "^2.13.1",
-    "vinyl-ftp": "^0.6.0"
+    "jquery": "^3.3.1",
+    "popper.js": "^1.12.9",
+    "vinyl-ftp": "^0.6.0",
+    "webpack": "^4.0.0",
+    "webpack-stream": "^4.0.2"
   },
   "scripts": {
-    "initialize": "gulp",
-    "initialize:install": "yarn install && bower install",
-    "initialize:compile": "gulp compile",
+    "initialize:dev": "gulp development",
+    "initialize:install": "yarn install",
     "initialize:optimize": "gulp optimize",
-    "initialize:unminified": "gulp unminified",
-    "initialize:help": "initialize.bat",
-    "initialize:?": "initialize.bat"
+    "initialize:prod": "gulp production",
+    "initialize:help": "initialize.bat"
   },
   "repository": "git+https://github.com/artisawesm/initialize.git",
-  "author": "Art San Diego | asd.artsandiego@gmail.com",
+  "author": "Artemio San Diego | asd.artsandiego@gmail.com",
   "license": "Apache",
   "bugs": {
     "url": "https://github.com/artisawesm/initialize/issues"

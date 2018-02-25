@@ -9,10 +9,8 @@ echo.
 echo.
 echo # Commands
 echo To use the commands simply type `npm run` followed by the command. i.e. `npm run initialize:help`
-echo 1. initialize              :   start initialize
-echo 2. initialize:install      :   install dependencies
-echo 3. initialize:compile      :   compile and minify libraries into a single `lib.min.js` and `lib.min.css` file
-echo 4. initialize:optimize     :   optimize images `PNG, JPG, SVG`
-echo 5. initialize:unminified   :   create unminified files for both app.js and app.css
+echo 1. initialize:install      :   install dependencies
+echo 2. initialize:dev          :   start initialize
+echo 4. initialize:prod         :   create unminified files for both app.js and app.css
+echo 5. initialize:optimize     :   optimize images `PNG, JPG, SVG`
 echo 6. initialize:help         :   display commands
-echo 7. initialize:?            :   display commands

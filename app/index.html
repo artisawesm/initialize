@@ -1,58 +1,40 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
-    <link rel="icon" href="assets/images/initialize-icon.png">
+    <link rel="icon" type="image/png" href="favicon.ico"/>
 	<title>Initialize</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=0">
     <meta name="description" content="initialize is a web development boilerplate with automation to help you bootstrap your project.">
     <meta name="author" content="Art San Diego | asd.artsandiego@gmail.com">
 	
-	<!-- bootstrap -->
-	<link rel="stylesheet" href="./assets/vendor/bootstrap/dist/css/bootstrap.min.css" type="text/css">
-	
-	<!-- app.min.css minified -->
+	<!-- Main css file -->
+	<!-- With Bootstrap 4 imported -->
 	<link rel="stylesheet" href="./assets/css/app.min.css" type="text/css"> 
-	
-	<!-- app.css unminified -->
-	<!-- =========================== -->
-	<!-- <link rel="stylesheet" href="assets/css/app.css" type="text/css"> -->
-	<!-- =========================== -->
-
-	<!-- modernizr -->
-	<!-- <script type="text/javascript" src="./assets/vendor/modernizr/modernizr.js"></script> -->
 
 </head>
 <body>
-	 <div class="title">
-		<h1 id="title">Initialize</h1>
-		<p>Go on, be awesome.</p>
-	</div> 
+	<div class="init">
+		<div class="title">
+			<h1 id="init">Initialize</h1>
+			<p>Be awesome.</p>
+		</div> 
+	</div>
 
-	<!-- jquery -->
-	<script type="text/javascript" src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+	<!-- Main js file-->
+	<!-- With jQuery and Bootstrap.js(4)-->
+	<script type="text/javascript" src="./assets/js/app.min.js"></script>
 
-	<!-- bootstrap -->
-	<script type="text/javascript" src="./assets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<!-- Google Site Tag: change UA-XXXXX-X to be your site's ID -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-XXXXX-X"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag() { dataLayer.push(arguments); }
+		gtag('js', new Date());
 
-	<!-- app.min.js minified-->
-	<script type="text/javascript" src="assets/js/app.min.js"></script>
+		gtag('config', 'UA-XXXXX-X');
+	</script>
 
-	<!-- app.js unminified -->
-	<!-- =========================== -->
-	<!-- <script type="text/javascript" src="assets/js/app.js"></script> -->
-	<!-- =========================== -->
-
-	<!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-      ga('create', 'UA-XXXXX-X', 'auto');
-      ga('require', 'eventTracker');
-      ga('send', 'pageview');
-    </script>
 </body>
 </html>
