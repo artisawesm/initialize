@@ -209,12 +209,6 @@ gulp.task('js', ()=> {
 
 // For development with server (XAMPP/PHP)
 gulp.task("serve", ()=> {
-
-	// Will dynamically add an index.php file
-	gulp.src('./'+appPath.html)
-		.pipe($.rename('index.php'))
-		.pipe(gulp.dest('./app'));
-
 	browserSync.init({
 		proxy: curDir+'/app/'
 	});
@@ -225,7 +219,6 @@ gulp.task("serve", ()=> {
 
 // For static HTML front end development (HTML)
 gulp.task('initialize', ()=> {
-
 	browserSync.init({
 		server: {
 			baseDir: './app',
