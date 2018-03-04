@@ -29,7 +29,8 @@ let appPath = { // app destination
 	js: 'app/assets/js',
 	libCss: 'app/assets/vendor/css/',
 	libJs: 'app/assets/vendor/js/',
-	html: 'app/*.html'
+	html: 'app/*.html',
+	php: 'app/*.php'
 };
 
 // For development with XAMPP
@@ -208,16 +209,23 @@ gulp.task('js', ()=> {
 
 // For development with server (XAMPP/PHP)
 gulp.task("serve", ()=> {
+
+	// Will dynamically add an index.php file
+	gulp.src('./'+appPath.html)
+		.pipe($.rename('index.php'))
+		.pipe(gulp.dest('./app'));
+
 	browserSync.init({
 		proxy: curDir+'/app/'
 	});
 	gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
 	gulp.watch(srcPath.js, ["js"]); //Unminified by default
-	gulp.watch("app/*.html").on("change", browserSync.reload);
+	gulp.watch('./'+appPath.php).on("change", browserSync.reload);
 });
 
 // For static HTML front end development (HTML)
 gulp.task('initialize', ()=> {
+
 	browserSync.init({
 		server: {
 			baseDir: './app',
