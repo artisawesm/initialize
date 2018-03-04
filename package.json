@@ -1,7 +1,7 @@
 {
   "name": "initialize",
-  "version": "2.0.0",
-  "description": "initialize is a front end web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.",
+  "version": "2.1.0",
+  "description": "initialize is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.",
   "main": "app.js",
   "dependencies": {},
   "devDependencies": {
@@ -31,6 +31,7 @@
   },
   "scripts": {
     "initialize:dev": "gulp development",
+    "initialize:serve": "gulp serve",
     "initialize:install": "yarn install",
     "initialize:optimize": "gulp optimize",
     "initialize:prod": "gulp production",

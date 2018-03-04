@@ -1,12 +1,12 @@
 'use strict';
 
-var gulp 		= require('gulp'),
+let gulp 		= require('gulp'),
 	browserSync = require('browser-sync').create(),
 	webpack = require('webpack'),
 	webpackStream = require('webpack-stream'),
 	webpackConfig = require('./webpack.config.js');
 	
-var $ = require('gulp-load-plugins')({
+let $ = require('gulp-load-plugins')({
 		camelize: true,
 		pattern: [
 			'gulp-*',
@@ -15,7 +15,7 @@ var $ = require('gulp-load-plugins')({
 		replaceString: /\bgulp[\-.]/
 	});
 
-var srcPath = { // sources
+let srcPath = { // sources
 	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}',
 	js: 'resources/assets/js/*.js',
 	scss: 'resources/assets/scss/**/*.scss',
@@ -23,7 +23,7 @@ var srcPath = { // sources
 	libJs: 'resources/assets/vendor/js/*.js'
 };
 
-var appPath = { // app destination
+let appPath = { // app destination
 	css: 'app/assets/css/',
 	img: 'app/assets/images',
 	js: 'app/assets/js',
@@ -31,6 +31,9 @@ var appPath = { // app destination
 	libJs: 'app/assets/vendor/js/',
 	html: 'app/*.html'
 };
+
+// For development with XAMPP
+let curDir = 'localhost/'+__dirname.split('\\').pop('\\');
 
 //==========================================================================
 // EXTERNAL TASKS -> Tasks that doesn't need to be automated
@@ -67,7 +70,7 @@ var appPath = { // app destination
 // });
 
 // == PRODUCTION ==
-gulp.task('scss-prod', function() {
+gulp.task('scss-prod', ()=> {
     return gulp.src(srcPath.scss)
       	.pipe($.sass({
       		outputStyle: 'compressed', 
@@ -94,7 +97,7 @@ gulp.task('scss-prod', function() {
     	.pipe(browserSync.stream())
 });
 
-gulp.task('js-prod', function() {
+gulp.task('js-prod', ()=> {
 	return gulp.src(srcPath.js)
 		.pipe($.plumber())
 		.pipe($.sourcemaps.init())
@@ -114,7 +117,7 @@ gulp.task("production", ["scss-prod", "js-prod"]);
 
 // == OPTIMIZE ==
 // Optmization of images
-gulp.task('optimize', function() {
+gulp.task('optimize', ()=> {
 	return gulp.src(srcPath.img)
 		.pipe($.imagemin([
 			$.imagemin.gifsicle({
@@ -152,7 +155,7 @@ gulp.task('optimize', function() {
 //==========================================================================
 // == SCSS ==
 // scss compiler - Unminified by default
-gulp.task('scss', function() {
+gulp.task('scss', ()=> {
     return gulp.src(srcPath.scss)
     	.pipe($.sourcemaps.init())
       	.pipe($.sass({
@@ -188,7 +191,7 @@ gulp.task('scss', function() {
 
 // == JS ==
 // JS generation with webpack - Unminified by default
-gulp.task('js', function() {
+gulp.task('js', ()=> {
 	return gulp.src(srcPath.js)
 		.pipe($.plumber())
 		.pipe($.sourcemaps.init())
@@ -203,9 +206,22 @@ gulp.task('js', function() {
     	}));
 });
 
-gulp.task('initialize', function() {
+// For development with server (XAMPP/PHP)
+gulp.task("serve", ()=> {
 	browserSync.init({
-		server: 'app/'
+		proxy: curDir+'/app/'
+	});
+	gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
+	gulp.watch(srcPath.js, ["js"]); //Unminified by default
+	gulp.watch("app/*.html").on("change", browserSync.reload);
+});
+
+// For static HTML front end development (HTML)
+gulp.task('initialize', ()=> {
+	browserSync.init({
+		server: {
+			baseDir: './app',
+		},
 	});
     gulp.watch(srcPath.scss, ['scss']); //Unminified by default
 	gulp.watch(srcPath.js, ['js']); //Unminified by default

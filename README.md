@@ -1,5 +1,5 @@
 # initialize
-`initialize` is a front end web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.
+`initialize` is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.
 
 # Prerequisite
 - [NodeJS](https://nodejs.org/en/)
@@ -18,11 +18,11 @@
 To use the commands simply type `npm run` followed by the command. i.e. `npm run initialize:help`.
 1. initialize:install      :   install dependencies.
 2. initialize:dev          :   start initialize in `development` mode.
+3. initialize:serve        :   start initialize in `serve` mode. (initialize with PHP!)
+- You can now use initialize with PHP,  just include `initialize` inside your `htdocs` ([XAMPP](https://www.apachefriends.org/index.html)) or `www` ([WAMP](http://www.wampserver.com/en/))
 4. initialize:prod         :   create minified files for both `JS` and `CSS`.
 5. initialize:optimize     :   optimize images `PNG, JPG, SVG`.
 6. initialize:help         :   display commands.
-
-
 
 
 
