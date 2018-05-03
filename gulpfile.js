@@ -1,6 +1,6 @@
 'use strict';
 
-let gulp 		= require('gulp'),
+let gulp= require('gulp'),
 	browserSync = require('browser-sync').create(),
 	webpack = require('webpack'),
 	webpackStream = require('webpack-stream'),
