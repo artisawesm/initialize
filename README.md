@@ -1,29 +1,41 @@
-# initialize
-`initialize` is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.
+# ``initialize``
+**Version 2.2.0**
 
-# Prerequisite
+A Web Development tool with static boilerplate that will help you bootstrap your project.
+
+# What you need
+- [GIT/GIT Bash](https://git-scm.com/downloads)
 - [NodeJS](https://nodejs.org/en/)
 - [Yarn](https://yarnpkg.com/en/)
 - [Ruby](https://www.ruby-lang.org/en/)
 - [SCSS](http://sass-lang.com/install)
 - [GulpJS](http://gulpjs.com/)
-- [GIT/GIT Bash](https://git-scm.com/downloads)
+- [Composer](https://getcomposer.org/)
 
-# Installation
-1. Open your terminal and clone the `initialize`.
-2. Install all the necessary dependencies using `npm run initialize:install`.
-3. Run `npm run initialize:dev` and your done! Congratulations, you're now using `initialize`.
- 
-# Commands
-To use the commands simply type `npm run` followed by the command. i.e. `npm run initialize:help`.
-1. initialize:install      :   install dependencies.
-2. initialize:dev          :   start initialize in `development` mode.
-3. initialize:serve        :   start initialize in `serve` mode. (initialize with PHP!)
-- You can now use initialize with PHP,  just include `initialize` inside your `htdocs` ([XAMPP](https://www.apachefriends.org/index.html)) or `www` ([WAMP](http://www.wampserver.com/en/))
-4. initialize:prod         :   create minified files for both `JS` and `CSS`.
-5. initialize:optimize     :   optimize images `PNG, JPG, SVG`.
-6. initialize:help         :   display commands.
+# Setting up
+1. Open your bash/terminal and clone **`initialize`**.
+2. Install all the dependencies using `npm run ini:install`.
+3. Type `npm run ini:dev` on your bash/terminal and your done!
 
+Congratulations, you're now using **`initialize`**!.
 
+# How `initialize` works
+Simply type `npm run` followed by the command. i.e. `npm run ini:help`.
+1. **ini:install**      :   install dependencies.
+2. **ini:dev**          :   start **`initialize`** in `development` mode. (Front End Development)
+3. **ini:serve**        :   start **`initialize`** in `serve` mode. (PHP Development)
+4. **ini:prod**         :   create minified files for both `JS` and `CSS`.
+5. **ini:optimize**     :   optimize images `PNG, JPG, SVG`.
+6. **ini:help**         :   display these commands.
 
-Developed with :heart: by Art
+**PHPloy Commands for `Initialize`**
+
+**`initialize`** is also using [PHPloy](https://github.com/banago/PHPloy) for deployment.
+
+1. **ini:phploy** : this will setup PHPloy on your directory by adding `phploy.ini` file.
+2. **ini:deploy** : this will deploy your changes on the server.
+
+# Thanks!
+Thank you for choosing **`initialize`**, this project started as a solution for my personal problems in Web Development, hopefully it can solve yours :) 
+
+Developed with :heart: for my fellow Developers

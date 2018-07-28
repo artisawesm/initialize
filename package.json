@@ -30,14 +30,14 @@
     "webpack-stream": "^4.0.2"
   },
   "scripts": {
-    "initialize:dev"       : "gulp development",
-    "initialize:serve"     : "gulp serve",
-    "initialize:install"   : "yarn install",
-    "initialize:optimize"  : "gulp optimize",
-    "initialize:prod"      : "gulp production",
-    "initialize:help"      : "initialize.bat",
-    "initialize:phploy"    : "phploy --init",
-    "initialize:deploy"    : "phploy"
+    "ini:dev"       : "gulp development",
+    "ini:serve"     : "gulp serve",
+    "ini:install"   : "yarn install",
+    "ini:optimize"  : "gulp optimize",
+    "ini:prod"      : "gulp production",
+    "ini:help"      : "initialize.bat",
+    "ini:phploy"    : "phploy --init",
+    "ini:deploy"    : "phploy"
   },
   "repository": "git+https://github.com/artisawesm/initialize.git",
   "author": "Artemio San Diego | asd.artsandiego@gmail.com",

@@ -174,25 +174,26 @@ gulp.task('js', ()=> {
   }));
 });
 
-// For development with server (XAMPP/PHP)
+// For PHP Development
 gulp.task("serve", ()=> {
 	browserSync.init({
 		proxy: curDir+'/app/'
 	});
+  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
 	gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
 	gulp.watch(srcPath.js, ["js"]); //Unminified by default
 	gulp.watch('./'+appPath.php).on("change", browserSync.reload);
 });
 
-gulp.task("serve", () => {
-  browserSync.init({
-    proxy: 'localhost/' + projName
-  });
-  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
-  gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
-  gulp.watch(srcPath.js, ["js"]); //Unminified by default
-  gulp.watch('*.php').on("change", browserSync.reload);
-});
+// For development with Wordpress :)
+// gulp.task("serve", () => {
+//   browserSync.init({
+//     proxy: 'localhost/' + projName
+//   });
+//   gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
+//   gulp.watch(srcPath.js, ["js"]); //Unminified by default
+//   gulp.watch('*.php').on("change", browserSync.reload);
+// });
 
 // For static HTML front end development (HTML)
 gulp.task('initialize', ()=> {
