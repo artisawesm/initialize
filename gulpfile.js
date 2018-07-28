@@ -4,7 +4,7 @@ let gulp          = require('gulp'),
     browserSync   = require('browser-sync').create(),
     webpack       = require('webpack'),
     webpackStream = require('webpack-stream'),
-    webpackConfig = require('./webpack.config.js');
+    webpackConfig = require('./webpack.config.js'),
     gcmq          = require('gulp-group-css-media-queries');
 	
 let $ = require('gulp-load-plugins')({
