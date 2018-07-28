@@ -1,6 +1,7 @@
 @import "partials/variables";
 @import "partials/custom";
 @import "node_modules/bootstrap/scss/bootstrap";
+@import "partials/responsive";
 
 .init {
     box-sizing: border-box;
@@ -19,6 +20,11 @@
         width: auto;
         position: absolute;
         margin: 30px;
+        @include breakpoint(mobile) {
+          width: 100%;
+          margin: 20px 0;
+          justify-content: center;
+        }
         &>p {
             font-family: $bebasBook;
             cursor: pointer;
@@ -70,6 +76,9 @@
             &.move {
                 letter-spacing: 0.1em;
             }
+            @include breakpoint(mobile) {
+              font-size: 70px;
+            }
         }
         p {
             font-family: $bebasBook;
@@ -77,6 +86,9 @@
             color: $primary2;
             letter-spacing: 0.5em;
             transition: all 2s ease;
+            @include breakpoint(mobile) {
+              font-size: 20px;
+            }
         }
     }
 }
