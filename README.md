@@ -1,7 +1,7 @@
 # ``initialize``
 **Version 2.2.0**
 
-A Web Development tool with static boilerplate that will help you bootstrap your project.
+A Web Development tool with SEO friendly boilerplate that will help start your project and automate your workflow.
 
 # What you need
 - [GIT/GIT Bash](https://git-scm.com/downloads)

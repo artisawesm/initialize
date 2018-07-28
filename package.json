@@ -1,7 +1,7 @@
 {
   "name": "initialize",
   "version": "2.2.0",
-  "description": "initialize is a web development toolkit that provides boilerplate and automates your workflow to help you bootstrap your projects.",
+  "description": "Initialize is a Web Development tool with SEO friendly boilerplate that will help start your project and automate your workflow.",
   "main": "app.js",
   "dependencies": {},
   "devDependencies": {
