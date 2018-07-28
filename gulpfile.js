@@ -1,10 +1,11 @@
 'use strict';
 
-let gulp= require('gulp'),
-	browserSync = require('browser-sync').create(),
-	webpack = require('webpack'),
-	webpackStream = require('webpack-stream'),
-	webpackConfig = require('./webpack.config.js');
+let gulp          = require('gulp'),
+    browserSync   = require('browser-sync').create(),
+    webpack       = require('webpack'),
+    webpackStream = require('webpack-stream'),
+    webpackConfig = require('./webpack.config.js');
+    gcmq          = require('gulp-group-css-media-queries');
 	
 let $ = require('gulp-load-plugins')({
 		camelize: true,
@@ -15,15 +16,15 @@ let $ = require('gulp-load-plugins')({
 		replaceString: /\bgulp[\-.]/
 	});
 
-let srcPath = { // sources
-	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}',
-	js: 'resources/assets/js/*.js',
+const srcPath = { // sources
 	scss: 'resources/assets/scss/**/*.scss',
-	libCss: 'resources/assets/vendor/css/*.css',
-	libJs: 'resources/assets/vendor/js/*.js'
+	js: 'resources/assets/js/*.js',
+	// vendorCss: 'resources/assets/vendor/css/*.css',
+	// vendorJs: 'resources/assets/vendor/js/*.js',
+	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}'
 };
 
-let appPath = { // app destination
+const appPath = { // app destination
 	css: 'app/assets/css/',
 	img: 'app/assets/images',
 	js: 'app/assets/js',
@@ -34,119 +35,89 @@ let appPath = { // app destination
 };
 
 // For development with XAMPP
-let curDir = 'localhost/'+__dirname.split('\\').pop('\\');
+const curDir = 'localhost/'+__dirname.split('\\').pop('\\');
+
+// Autoprefixer browsers
+const compBrowsers = [
+  'last 5 version',
+  'ie >= 11'
+];
+
+const projName = '';
 
 //==========================================================================
 // EXTERNAL TASKS -> Tasks that doesn't need to be automated
 //==========================================================================
 
-// == FTP ==
-//This task will transfer your local files to your live site via FTP
-// var ftpHost = ''; //set your site's url
-// var ftpUser = ''; //ftp username access
-// var ftpPassword = ''; //ftp password access
-// var ftpDestination = ''; //set the destination
-// gulp.task('ftp', function () {
-// 	var conn = ftp.create( {
-// 		host:     ftpHost, 
-// 		user:     ftpUser,
-// 		password: ftpPassword,
-// 		parallel: 10
-// 	});
-
-// 	var files = [ //files to upload
-// 		'app/assets/css/**',
-// 		'app/assets/js/**',
-// 		'app/*.html'
-// 	];
-
-// 	return gulp.src(files, { base: '.', buffer: false })
-// 		.pipe(conn.newer(ftpDestination))
-// 		.pipe(conn.dest(ftpDestination))
-// 		.pipe(notify({
-//     		title: 'Deployment',
-//     		message: 'Files were successfully uploaded to FTP',
-//     		onLast: true
-//     	}));
-// });
-
-// == PRODUCTION ==
-gulp.task('scss-prod', ()=> {
-    return gulp.src(srcPath.scss)
-      	.pipe($.sass({
-      		outputStyle: 'compressed', 
-      		errLogToConsole: true
-      	}).on('error', $.notify.onError(function (error) {
-      		return 'Error in SASS!: ' + error.message;
-      	})))
-		.pipe($.autoprefixer({
-			browsers: [
-				'last 2 versions',
-				'ie >= 10',
-				'ie_mob >= 10',
-				'ff >= 30',
-				'chrome >= 34',
-				'safari >= 7',
-				'opera >= 23',
-				'ios >= 7',
-				'android >= 4.4',
-				'bb >= 10'
-			]
-		}))
-      	.pipe($.rename('app.min.css'))
-    	.pipe(gulp.dest(appPath.css))
-    	.pipe(browserSync.stream())
+// == TEST ==
+gulp.task('test', ()=> {
+  console.log('Put your test task here');
 });
 
+// == PROD ==
+gulp.task('scss-prod', ()=> {
+  return gulp.src(srcPath.scss)
+  .pipe($.sass({
+    outputStyle: 'compressed', 
+    errLogToConsole: true
+  }).on('error', $.notify.onError(function (error) {
+    return 'Oops: Error in Production!: ' + error.message;
+  })))
+  .pipe($.autoprefixer({
+    browsers: compBrowsers
+  }))
+  .pipe($.rename('app.min.css'))
+  .pipe(gulp.dest(appPath.css))
+  .pipe(browserSync.stream());
+});
 gulp.task('js-prod', ()=> {
 	return gulp.src(srcPath.js)
-		.pipe($.plumber())
-		.pipe($.sourcemaps.init())
-		.pipe(webpackStream(webpackConfig), webpack)
-		.pipe($.uglify())
-		.pipe($.sourcemaps.write('.'))
-		.pipe(gulp.dest(appPath.js))
-		.pipe(browserSync.stream())
-		.pipe($.notify({
-			title: "JS|CSS",
-			message: "Minified JS and CSS files are successfully generated.",
-			onLast: true
-		}));
+  .pipe($.plumber())
+  .pipe($.sourcemaps.init())
+  .pipe(webpackStream(webpackConfig), webpack)
+  .pipe($.uglify())
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest(appPath.js))
+  .pipe(browserSync.stream())
+  .pipe($.notify({
+    title: "JS | CSS Minification",
+    message: "JS and CSS is ready for production.",
+    onLast: true
+  }));
 });
-
 gulp.task("production", ["scss-prod", "js-prod"]);
 
 // == OPTIMIZE ==
 // Optmization of images
 gulp.task('optimize', ()=> {
 	return gulp.src(srcPath.img)
-		.pipe($.imagemin([
-			$.imagemin.gifsicle({
-				interlaced: true
-			}),
-			$.imagemin.jpegtran({
-				progressive: true,
-				quality: 80
-			}),
-			$.imagemin.optipng({
-				optimizationLevel: 7
-			}),
-			$.imagemin.svgo({
-				plugins: [{
-					removeViewBox: true,
-					removeEmptyAttrs: true,
-					removeMetadata: true,
-					removeUselessStrokeAndFill: true
-				}]
-			})
-		]))
-		.pipe($.clean())
-		.pipe(gulp.dest(appPath.img))
-		.pipe($.notify({
-    		title: 'Images',
-    		message: 'Images optimized!',
-    		onLast: true
-    	}));
+  .pipe($.imagemin([
+    $.imagemin.gifsicle({
+      interlaced: true
+    }),
+    $.imagemin.jpegtran({
+      progressive: true,
+      quality: 80
+    }),
+    $.imagemin.optipng({
+      optimizationLevel: 7
+    }),
+    $.imagemin.svgo({
+      plugins: [{
+        removeViewBox: true,
+        removeEmptyAttrs: true,
+        removeMetadata: true,
+        removeUselessStrokeAndFill: true
+      }]
+    })
+  ]))
+  .pipe(gulp.dest(appPath.img))
+  .pipe($.notify({
+    title: 'Image Optimization',
+    message: 'Images optimized!',
+    onLast: true
+  }))
+  .pipe($.clean());
 });
 //==========================================================================
 //==========================================================================
@@ -154,57 +125,53 @@ gulp.task('optimize', ()=> {
 //==========================================================================
 // AUTOMATED TASKS 
 //==========================================================================
+// == GROUP ==
+gulp.task('group', () => {
+  gulp.src(appPath.css + '*.css')
+    .pipe(gcmq())
+    .pipe(gulp.dest(appPath.css));
+});
+
 // == SCSS ==
 // scss compiler - Unminified by default
 gulp.task('scss', ()=> {
-    return gulp.src(srcPath.scss)
-    	.pipe($.sourcemaps.init())
-      	.pipe($.sass({
-      		outputStyle: 'expanded', 
-      		errLogToConsole: true
-      	}).on('error', $.notify.onError(function (error) {
-      		return 'Error in SASS!: ' + error.message;
-      	})))
-    	.pipe($.autoprefixer({
-			browsers: [
-				'last 2 versions',
-				'ie >= 10',
-				'ie_mob >= 10',
-				'ff >= 30',
-				'chrome >= 34',
-				'safari >= 7',
-				'opera >= 23',
-				'ios >= 7',
-				'android >= 4.4',
-				'bb >= 10'
-			]
-		}))
-    	.pipe($.rename('app.min.css'))
-    	.pipe($.sourcemaps.write('.'))
-    	.pipe(gulp.dest(appPath.css))
-    	.pipe(browserSync.stream())
-    	.pipe($.notify({
-    		title: 'CSS',
-    		message: 'SCSS files compiled!',
-    		onLast: true
-    	}));
+  return gulp.src(srcPath.scss)
+  .pipe($.sourcemaps.init())
+  .pipe($.sass({
+    outputStyle: 'expanded', 
+    errLogToConsole: true
+  }).on('error', $.notify.onError(function (error) {
+    return 'Oops: Error in SASS!: ' + error.message;
+  })))
+  .pipe($.autoprefixer({
+    browsers: compBrowsers
+  }))
+  .pipe($.rename('app.min.css'))
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest(appPath.css))
+  .pipe(browserSync.stream())
+  .pipe($.notify({
+    title: 'SCSS',
+    message: 'SCSS compiled!',
+    onLast: true
+  }));
 });
 
 // == JS ==
 // JS generation with webpack - Unminified by default
 gulp.task('js', ()=> {
 	return gulp.src(srcPath.js)
-		.pipe($.plumber())
-		.pipe($.sourcemaps.init())
-	    .pipe(webpackStream(webpackConfig), webpack)
-		.pipe($.sourcemaps.write('.'))
-		.pipe(gulp.dest(appPath.js))
-		.pipe(browserSync.stream())
-		.pipe($.notify({
-    		title: 'JS',
-    		message: 'JS files compiled!',
-    		onLast: true
-    	}));
+  .pipe($.plumber())
+  .pipe($.sourcemaps.init())
+  .pipe(webpackStream(webpackConfig), webpack)
+  .pipe($.sourcemaps.write('.'))
+  .pipe(gulp.dest(appPath.js))
+  .pipe(browserSync.stream())
+  .pipe($.notify({
+    title: 'JS',
+    message: 'JS compiled!',
+    onLast: true
+  }));
 });
 
 // For development with server (XAMPP/PHP)
@@ -217,16 +184,27 @@ gulp.task("serve", ()=> {
 	gulp.watch('./'+appPath.php).on("change", browserSync.reload);
 });
 
+gulp.task("serve", () => {
+  browserSync.init({
+    proxy: 'localhost/' + projName
+  });
+  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
+  gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
+  gulp.watch(srcPath.js, ["js"]); //Unminified by default
+  gulp.watch('*.php').on("change", browserSync.reload);
+});
+
 // For static HTML front end development (HTML)
 gulp.task('initialize', ()=> {
 	browserSync.init({
 		server: {
 			baseDir: './app',
 		},
-	});
-    gulp.watch(srcPath.scss, ['scss']); //Unminified by default
+  });
+  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
+  gulp.watch(srcPath.scss, ['scss']); //Unminified by default
 	gulp.watch(srcPath.js, ['js']); //Unminified by default
-    gulp.watch('app/*.html').on('change', browserSync.reload);
+  gulp.watch('app/*.html').on('change', browserSync.reload);
 });
 
 // For development
