@@ -1,6 +1,6 @@
 {
   "name": "initializr",
-  "version": "2.2.1",
+  "version": "2.2.3",
   "description": "initializr is a Web Development tool with SEO friendly boilerplate that will help start your project and automate your workflow.",
   "main": "index.js",
   "dependencies": {},
@@ -40,7 +40,18 @@
     "ini:deploy"    : "phploy"
   },
   "repository": "git+https://github.com/artisawesm/initialize.git",
-  "author": "Artemio San Diego | asd.artsandiego@gmail.com",
+  "author": "Artemio San Diego <asd.artsandiego@gmail.com> (http://artisawesm.com)",
+  "keywords": [
+    "js",
+    "css",
+    "sass",
+    "front-end",
+    "web development",
+    "automation",
+    "boilerplate",
+    "tool",
+    "webpack"
+  ],
   "license": "Apache",
   "bugs": {
     "url": "https://github.com/artisawesm/initialize/issues"

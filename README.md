@@ -1,5 +1,4 @@
 # ``initializr``
-**Version 2.2.0**
 
 A Web Development tool with SEO friendly boilerplate that will help start your project and automate your workflow.
 
