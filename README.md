@@ -1,4 +1,4 @@
-# `Initializr` [![npm](https://img.shields.io/npm/v/:package.svg?style=flat-square)](https://www.npmjs.com/package/initializr) [![npm](https://img.shields.io/npm/dt/:package.svg?style=flat-square)](https://npmcharts.com/compare/initializr) [![NpmLicense](https://img.shields.io/npm/l/:package.svg?style=flat-square)](https://github.com/artisawesm/initializr/blob/master/LICENSE)
+# `Initializr` [![npm](https://img.shields.io/npm/v/initializr.svg?style=flat-square)](https://www.npmjs.com/package/initializr) [![npm](https://img.shields.io/npm/dm/initializr.svg)](https://npmcharts.com/compare/initializr) [![NpmLicense](https://img.shields.io/npm/l/initializr.svg?style=flat-square)](https://github.com/artisawesm/initializr/blob/master/LICENSE)
 
 An automation tool for creating single page applications.
 
