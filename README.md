@@ -1,31 +1,26 @@
-# ``initializr``
+# `Initializr`
 
-A Web Development tool with SEO friendly boilerplate that will help start your project and automate your workflow.
+An automation tool for creating single page applications.
 
-# What you need
-- [GIT/GIT Bash](https://git-scm.com/downloads)
-- [NodeJS](https://nodejs.org/en/)
-- [Yarn](https://yarnpkg.com/en/)
-- [Ruby](https://www.ruby-lang.org/en/)
-- [SCSS](http://sass-lang.com/install)
-- [GulpJS](http://gulpjs.com/)
-- [Composer](https://getcomposer.org/)
+# What do we have here
+
+**`Initializr`** is a tool powered by [Gulp](https://gulpjs.com/) and [Webpack](https://webpack.js.org/) that minifies and bundles your assets, provides a SEO friendly boilerplate and can be used with [React JS](https://reactjs.org/) (and soon to have [Vue JS](https://vuejs.org/) as well).
 
 # Setting up
-1. Open your bash/terminal and clone **`initializr`**.
-2. Install all the dependencies using `npm run ini:install`.
-3. Type `npm run ini:dev` on your bash/terminal and your done!
+
+1. Open your bash/terminal and clone [**`Initializr`**](https://github.com/artisawesm/initializr).
+2. Install all the dependencies using `npm run ini:setup`.
+3. Then run **`Initializr`** by typing `npm run ini` on your bash/terminal.
 
 Congratulations, you're now using **`initializr`**!.
 
 # How `initializr` works
-Simply type `npm run` followed by the command. i.e. `npm run ini:help`.
-1. **ini:install**      :   install dependencies.
-2. **ini:dev**          :   start **`initializr`** in `development` mode. (Front End Development)
-3. **ini:serve**        :   start **`initializr`** in `serve` mode. (PHP Development)
-4. **ini:prod**         :   create minified files for both `JS` and `CSS`.
-5. **ini:optimize**     :   optimize images `PNG, JPG, SVG`.
-6. **ini:help**         :   display these commands.
+
+Simply type `npm run` followed by the command. i.e. `npm run ini`.
+
+1. **ini:setup** : install dependencies.
+2. **ini** : start **`initializr`** in `development` mode.
+3. **ini:prod** : bundles and minifies `JS` and `CSS` files for `production`.
 
 **PHPloy Commands for `initializr`**
 
@@ -35,6 +30,7 @@ Simply type `npm run` followed by the command. i.e. `npm run ini:help`.
 2. **ini:deploy** : this will deploy your changes on the server.
 
 # Thanks!
-Thank you for choosing **`initializr`**, this project started as a solution for my personal problems in Web Development, hopefully it can solve yours :) 
 
-Developed with :heart: for my fellow Developers
+Thank you for choosing **`initializr`**, this project started as a solution for my personal issues in development, hopefully it can solve yours.
+
+</> with :heart: by [Art](https://artisawesm.com/)
