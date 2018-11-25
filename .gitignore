@@ -1,3 +1,4 @@
-/node_modules
+/node_modules/
+.vscode
 phploy.ini
-*.lock
+.package.json.lock

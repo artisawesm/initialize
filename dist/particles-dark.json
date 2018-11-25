@@ -1,0 +1,34 @@
+{
+  "particles": {
+    "number": {
+      "value": 60
+    },
+    "color": {
+      "value": "#fff"
+    },
+    "size": {
+      "value": 2
+    },
+    "line_linked": {
+      "enable": true,
+      "color": "#fff"
+    },
+    "opacity": {
+      "value": 1,
+      "random": true
+    }
+  },
+  "interactivity": {
+    "events": {
+      "onclick": {
+        "enable": false,
+        "mode": "push"
+      }
+    },
+    "modes": {
+      "push": {
+        "particles_nb": 2
+      }
+    }
+  }
+}

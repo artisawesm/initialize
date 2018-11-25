@@ -1,212 +1,138 @@
-'use strict';
+const { gulp, series, parallel, watch, src, dest } = require("gulp"),
+  chalk = require("chalk"),
+  log = require("fancy-log"),
+  group = require("gulp-group-css-media-queries"),
+  clean = require("gulp-clean-css"),
+  webpack = require("webpack"),
+  wpstream = require("webpack-stream"),
+  wpconfig = require("./webpack.config.js"),
+  browserSync = require("browser-sync").create();
 
-let gulp          = require('gulp'),
-    browserSync   = require('browser-sync').create(),
-    webpack       = require('webpack'),
-    webpackStream = require('webpack-stream'),
-    webpackConfig = require('./webpack.config.js'),
-    gcmq          = require('gulp-group-css-media-queries');
-	
-let $ = require('gulp-load-plugins')({
-		camelize: true,
-		pattern: [
-			'gulp-*',
-			'gulp.*'
-		],
-		replaceString: /\bgulp[\-.]/
-	});
+// ===========
+// gulp load
+const $ = require("gulp-load-plugins")({
+  camelize: true,
+  pattern: ["gulp-*", "gulp.*"],
+  replaceString: /\bgulp[\-.]/
+});
 
-const srcPath = { // sources
-	scss: 'resources/assets/scss/**/*.scss',
-	js: 'resources/assets/js/*.js',
-	// vendorCss: 'resources/assets/vendor/css/*.css',
-	// vendorJs: 'resources/assets/vendor/js/*.js',
-	img: 'resources/assets/images/**/*.{jpg,png,svg,gif}'
+// sass config
+$.sass.compiler = require("node-sass");
+
+// autoprefix config
+const browsers = ["last 2 version", "ie >= 11", "safari >= 9.1"];
+
+// default messages
+const msg = {
+  wait:
+    chalk.bgGreen.black("\n\n Wait ") +
+    chalk.bold.green(" Almost there...\n\n"),
+  error:
+    chalk.bgRed.black("\n\n OOPS! ") +
+    chalk.bold.red(" I don't feel so good...\n\n"),
+  success:
+    chalk.bgCyan.black("\n\n SUCCESS! ") +
+    chalk.bold.cyan(" Initializr build complete!\n\n"),
+  js:
+    chalk.bgYellow.black("\n\n SCRIPT ") +
+    chalk.yellow(" JS Build successfully! \n\n"),
+  css:
+    chalk.bgMagenta.black("\n\n STYLE ") +
+    chalk.magenta(" CSS Compiled successfully! \n\n")
 };
 
-const appPath = { // app destination
-	css: 'app/assets/css/',
-	img: 'app/assets/images',
-	js: 'app/assets/js',
-	libCss: 'app/assets/vendor/css/',
-	libJs: 'app/assets/vendor/js/',
-	html: 'app/*.html',
-	php: 'app/*.php'
+// default paths
+const path = {
+  src: {
+    css: "src/sass/**/*.scss",
+    js: "src/js/**/*"
+  },
+  dist: {
+    css: "dist/assets/css/",
+    js: "dist/assets/js/"
+  }
 };
 
-// For development with XAMPP
-const curDir = 'localhost/'+__dirname.split('\\').pop('\\');
+// browsersync config
+const config = {
+  server: {
+    baseDir: "dist"
+  },
+  online: true,
+  tunnel: true
+};
+// ===========
 
-// Autoprefixer browsers
-const compBrowsers = [
-  'last 5 version',
-  'ie >= 11'
-];
+// development
+function ES() {
+  return src(path.src.js)
+    .pipe($.plumber())
+    .pipe(
+      wpstream(wpconfig),
+      webpack
+    )
+    .pipe(dest(path.dist.js))
+    .pipe(browserSync.stream())
+    .on("end", () => {
+      log(msg.js);
+    });
+}
 
-const projName = '';
+function SCSS() {
+  return src(path.src.css)
+    .pipe($.sourcemaps.init({ loadMaps: true, largeFile: true }))
+    .pipe($.plumber())
+    .pipe(
+      $.sass
+        .sync({ outputStyle: "expanded", errLogToConsole: true })
+        .on("error", function(error) {
+          log(msg.error + error.message);
+        })
+    )
+    .pipe($.autoprefixer({ browsers: browsers }))
+    .pipe($.rename({ basename: "app", suffix: ".min" }))
+    .pipe(group())
+    .pipe($.sourcemaps.write("./"))
+    .pipe(dest(path.dist.css))
+    .pipe(browserSync.stream())
+    .on("end", () => {
+      log(msg.css);
+    });
+}
 
-//==========================================================================
-// EXTERNAL TASKS -> Tasks that doesn't need to be automated
-//==========================================================================
+// production
+function ESPROD() {
+  return src(path.dist.js + "*.js")
+    .pipe($.uglify())
+    .pipe(dest(path.dist.js))
+    .pipe(browserSync.stream())
+    .on("end", () => {
+      log(msg.js);
+    });
+}
 
-// == TEST ==
-gulp.task('test', ()=> {
-  console.log('Put your test task here');
-});
+function SCSSPROD() {
+  return src(path.dist.css + "*.css")
+    .pipe(clean())
+    .pipe(dest(path.dist.css))
+    .pipe(browserSync.stream())
+    .on("end", () => {
+      log(msg.css);
+    });
+}
 
-// == PROD ==
-gulp.task('scss-prod', ()=> {
-  return gulp.src(srcPath.scss)
-  .pipe($.sass({
-    outputStyle: 'compressed', 
-    errLogToConsole: true
-  }).on('error', $.notify.onError(function (error) {
-    return 'Oops: Error in Production!: ' + error.message;
-  })))
-  .pipe($.autoprefixer({
-    browsers: compBrowsers
-  }))
-  .pipe($.rename('app.min.css'))
-  .pipe(gulp.dest(appPath.css))
-  .pipe(browserSync.stream());
-});
-gulp.task('js-prod', ()=> {
-	return gulp.src(srcPath.js)
-  .pipe($.plumber())
-  .pipe($.sourcemaps.init())
-  .pipe(webpackStream(webpackConfig), webpack)
-  .pipe($.uglify())
-  .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(appPath.js))
-  .pipe(browserSync.stream())
-  .pipe($.notify({
-    title: "JS | CSS Minification",
-    message: "JS and CSS is ready for production.",
-    onLast: true
-  }));
-});
-gulp.task("production", ["scss-prod", "js-prod"]);
+// run initializr
+function INI() {
+  browserSync.init(config);
+  watch("dist/*.html").on("change", browserSync.reload);
+  watch(path.src.css, SCSS);
+  watch(path.src.js, ES);
+}
 
-// == OPTIMIZE ==
-// Optmization of images
-gulp.task('optimize', ()=> {
-	return gulp.src(srcPath.img)
-  .pipe($.imagemin([
-    $.imagemin.gifsicle({
-      interlaced: true
-    }),
-    $.imagemin.jpegtran({
-      progressive: true,
-      quality: 80
-    }),
-    $.imagemin.optipng({
-      optimizationLevel: 7
-    }),
-    $.imagemin.svgo({
-      plugins: [{
-        removeViewBox: true,
-        removeEmptyAttrs: true,
-        removeMetadata: true,
-        removeUselessStrokeAndFill: true
-      }]
-    })
-  ]))
-  .pipe(gulp.dest(appPath.img))
-  .pipe($.notify({
-    title: 'Image Optimization',
-    message: 'Images optimized!',
-    onLast: true
-  }))
-  .pipe($.clean());
-});
-//==========================================================================
-//==========================================================================
+// tasks exports
+INI.description = "Run initializr in Development mode";
+exports.ini = INI;
 
-//==========================================================================
-// AUTOMATED TASKS 
-//==========================================================================
-// == GROUP ==
-gulp.task('group', () => {
-  gulp.src(appPath.css + '*.css')
-    .pipe(gcmq())
-    .pipe(gulp.dest(appPath.css));
-});
-
-// == SCSS ==
-// scss compiler - Unminified by default
-gulp.task('scss', ()=> {
-  return gulp.src(srcPath.scss)
-  .pipe($.sourcemaps.init())
-  .pipe($.sass({
-    outputStyle: 'expanded', 
-    errLogToConsole: true
-  }).on('error', $.notify.onError(function (error) {
-    return 'Oops: Error in SASS!: ' + error.message;
-  })))
-  .pipe($.autoprefixer({
-    browsers: compBrowsers
-  }))
-  .pipe($.rename('app.min.css'))
-  .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(appPath.css))
-  .pipe(browserSync.stream())
-  .pipe($.notify({
-    title: 'SCSS',
-    message: 'SCSS compiled!',
-    onLast: true
-  }));
-});
-
-// == JS ==
-// JS generation with webpack - Unminified by default
-gulp.task('js', ()=> {
-	return gulp.src(srcPath.js)
-  .pipe($.plumber())
-  .pipe($.sourcemaps.init())
-  .pipe(webpackStream(webpackConfig), webpack)
-  .pipe($.sourcemaps.write('.'))
-  .pipe(gulp.dest(appPath.js))
-  .pipe(browserSync.stream())
-  .pipe($.notify({
-    title: 'JS',
-    message: 'JS compiled!',
-    onLast: true
-  }));
-});
-
-// For PHP Development
-gulp.task("serve", ()=> {
-	browserSync.init({
-		proxy: curDir+'/app/'
-	});
-  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
-	gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
-	gulp.watch(srcPath.js, ["js"]); //Unminified by default
-	gulp.watch('./'+appPath.php).on("change", browserSync.reload);
-});
-
-// For development with Wordpress :)
-// gulp.task("serve", () => {
-//   browserSync.init({
-//     proxy: 'localhost/' + projName
-//   });
-//   gulp.watch(srcPath.scss, ["scss"]); //Unminified by default
-//   gulp.watch(srcPath.js, ["js"]); //Unminified by default
-//   gulp.watch('*.php').on("change", browserSync.reload);
-// });
-
-// For static HTML front end development (HTML)
-gulp.task('initialize', ()=> {
-	browserSync.init({
-		server: {
-			baseDir: './app',
-		},
-  });
-  gulp.watch(appPath.css + '*.css', ['group']); //Media Queries Grouping
-  gulp.watch(srcPath.scss, ['scss']); //Unminified by default
-	gulp.watch(srcPath.js, ['js']); //Unminified by default
-  gulp.watch('app/*.html').on('change', browserSync.reload);
-});
-
-// For development
-gulp.task('development', ['initialize']);
+const PROD = parallel(ESPROD, SCSSPROD);
+PROD.description = "Run initializr in Production mode";
+exports.prod = PROD;
