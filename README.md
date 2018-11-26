@@ -8,9 +8,10 @@ An automation tool for creating single page applications.
 
 # Setting up
 
-1. Open your bash/terminal and clone [**`Initializr`**](https://github.com/artisawesm/initializr).
-2. Install all the dependencies using `npm run ini:setup`.
-3. Then run **`Initializr`** by typing `npm run ini` on your bash/terminal.
+1. Install [Node Js](https://nodejs.org/en/) and [Gulp Js](https://gulpjs.com/)
+2. Open your bash/terminal and clone [**`Initializr`**](https://github.com/artisawesm/initializr).
+3. Install all the dependencies using `npm run ini:setup`.
+4. Then run **`Initializr`** by typing `npm run ini` on your bash/terminal.
 
 Congratulations, you're now using **`initializr`**!.
 
@@ -24,7 +25,7 @@ Simply type `npm run` followed by the command. i.e. `npm run ini`.
 
 **PHPloy Commands for `initializr`**
 
-**`initializr`** is also using [PHPloy](https://github.com/banago/PHPloy) for deployment.
+**`initializr`** also supports [PHPloy](https://github.com/banago/PHPloy) for deployment. PHPloy can be installed using [composer](https://getcomposer.org/)
 
 1. **ini:phploy** : this will setup PHPloy on your directory by adding `phploy.ini` file.
 2. **ini:deploy** : this will deploy your changes on the server.
