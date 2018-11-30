@@ -1,6 +1,6 @@
 {
   "name": "initializr",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "An automation tool for creating single page applications.",
   "main": "index.js",
   "scripts": {
