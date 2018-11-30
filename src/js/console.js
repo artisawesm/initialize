@@ -1,4 +1,3 @@
-// Console
 const devStyle = [
   'color: #ffffff',
   'padding: 0.5em',

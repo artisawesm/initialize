@@ -1,19 +1,20 @@
 # `Initializr` [![npm](https://img.shields.io/npm/v/initializr.svg?style=flat-square)](https://www.npmjs.com/package/initializr) [![npm](https://img.shields.io/npm/dm/initializr.svg?style=flat-square)](https://npmcharts.com/compare/initializr) [![NpmLicense](https://img.shields.io/npm/l/initializr.svg?style=flat-square)](https://github.com/artisawesm/initializr/blob/master/LICENSE)
 
-An automation tool for creating single page applications.
+A Front End Web Development tool that automates minification and bundling of assets, provides Search Engine Optimized boilerplate and promotes modular coding with the help of the latest JS Frameworks.
 
 # What do we have here
 
-**`Initializr`** is a tool powered by [Gulp](https://gulpjs.com/) and [Webpack](https://webpack.js.org/) that minifies and bundles your assets, provides a SEO friendly boilerplate and can be used with [React JS](https://reactjs.org/) (and soon to have [Vue JS](https://vuejs.org/) as well).
+**`Initializr`** is powered by [Gulp](https://gulpjs.com/) and [Webpack](https://webpack.js.org/), I also integrated [React JS](https://reactjs.org/) on its core and planning to add the flexibility to use [Vue JS](https://vuejs.org/) as well, **`Initializr`** is also using [Babel](https://babeljs.io/) as the ES6 transpiler and [Bootstrap 4](https://getbootstrap.com/) as the main Front End framework.
 
 # Setting up
 
-1. Install [Node Js](https://nodejs.org/en/) and [Gulp Js](https://gulpjs.com/)
-2. Open your bash/terminal and clone [**`Initializr`**](https://github.com/artisawesm/initializr).
+1. Install [Node Js](https://nodejs.org/en/), [Yarn](https://yarnpkg.com/en/) and [Gulp Js](https://gulpjs.com/) **Required**
+2. Open your terminal and clone [**`Initializr`**](https://github.com/artisawesm/initializr) **OR** install it using `npm install initializr`.
 3. Install all the dependencies using `npm run ini:setup`.
-4. Then run **`Initializr`** by typing `npm run ini` on your bash/terminal.
+4. Then run **`Initializr`** by typing `npm run ini` on your terminal.
+5. Your default browser will open with the **`Initializr`** running.
 
-Congratulations, you're now using **`initializr`**!.
+Congratulations, you're now using the awesome **`Initializr`**!.
 
 # How `initializr` works
 
@@ -30,8 +31,8 @@ Simply type `npm run` followed by the command. i.e. `npm run ini`.
 1. **ini:phploy** : this will setup PHPloy on your directory by adding `phploy.ini` file.
 2. **ini:deploy** : this will deploy your changes on the server.
 
-# Thanks!
+# Thank you!
 
-Thank you for choosing **`initializr`**, this project started as a solution for my personal issues in development, hopefully it can solve yours.
+This project was once the solution for my tardiness and procrastinations, I guess I should start working on this full time, tomorrow.
 
 </> with :heart: by [Art](https://artisawesm.com/)
