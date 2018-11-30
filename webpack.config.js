@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   mode: "none",
-  entry: "./src/js/app.js",
+  entry: "./src/js/index.js",
   devtool: "source-map",
   output: {
     path: path.join(__dirname, "/dist/assets/js"),
@@ -11,17 +11,19 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx?/,
+        exclude: /node_modules/,
         resolve: {
           extensions: [".js", ".jsx"]
         },
-        exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"]
+        use: [
+          {
+            loader: "babel-loader",
+            options: {
+              presets: ["@babel/preset-env", "@babel/preset-react"]
+            }
           }
-        }
+        ]
       }
     ]
   }

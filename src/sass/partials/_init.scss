@@ -7,79 +7,51 @@
   background-color: $primary;
   overflow: hidden;
   transition: all 1s ease;
-
   #particles-js {
     position: absolute;
     overflow: hidden;
     height: 100vh;
-    // display: none;/
     width: 100%;
   }
-
   &.dark {
     background-color: $primary2;
-  }
-
-  .toggle-light-dark {
-    display: flex;
-    width: auto;
-    position: absolute;
-    margin: 30px;
-
-    @include breakpoint(mobile) {
-      // width: 100%;
-      // margin: 20px 0;
-      justify-content: center;
-      width: auto;
-      height: auto;
-      margin: 20px;
+    .branding {
+      filter: invert(0%);
     }
-
-    &>p {
-      font-family: $bebasBook;
-      cursor: pointer;
-      margin: 10px 0;
-      padding: 5px 10px;
-      font-size: 20px;
-      letter-spacing: 5px;
-    }
-
-    &.light {
-      &>p {
-        border: 2px solid $primary2;
-        color: $primary2;
+    .title {
+      .header {
+        & > h1.htitle,
+        & > p.hsub {
+          color: $primary;
+        }
       }
-    }
-
-    &.dark {
-      &>p {
-        border: 2px solid $primary;
-        color: $primary;
+      .links {
+        & > a.link {
+          color: $primary;
+          &:after {
+            background-color: $primary;
+          }
+        }
       }
     }
   }
-
   .branding {
     width: auto;
     height: 100px;
     position: fixed;
-    right: 0;
+    left: 0;
     margin: 30px;
     transition: all 0.5s ease;
     filter: invert(100%);
+    cursor: pointer;
 
     @include breakpoint(mobile) {
-      right: 0;
+      left: 0;
       top: 0;
       margin: 20px;
       height: 50px;
     }
-
-    &.dark {
-      filter: invert(0%);
-    }
   }
-
   .title {
     display: flex;
     text-align: center;
@@ -89,107 +61,94 @@
     height: 100vh;
     flex-direction: column;
 
-    &.dark {
+    div.header {
       h1 {
-        color: $primary;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        font-family: $bebasBook;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 200px;
+        margin: 0;
+        font-kerning: auto;
+        // letter-spacing: -0.1em;
+        letter-spacing: 0.1em;
+        color: $primary2;
+        transition: all 2s ease;
+
+        span {
+          transform: rotate(180deg) translateX(20px);
+
+          @include breakpoint(mobile) {
+            transform: rotate(180deg) translateX(5px) translateY(17px);
+          }
+        }
+
+        &.move {
+          letter-spacing: 0.1em;
+        }
+
+        @include breakpoint(mobile) {
+          font-size: 70px;
+        }
       }
 
       p {
-        color: $primary;
-      }
-
-      a {
-        color: $primary;
-
-        &:after {
-          background-color: $primary;
-        }
-      }
-    }
-
-    h1 {
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      font-family: $bebasBook;
-      font-weight: 700;
-      text-transform: uppercase;
-      font-size: 200px;
-      margin: 0;
-      font-kerning: auto;
-      // letter-spacing: -0.1em;
-      letter-spacing: 0.1em;
-      color: $primary2;
-      transition: all 2s ease;
-
-      span {
-        transform: rotate(180deg) translateX(20px);
+        font-family: $bebasBook;
+        font-size: 30px;
+        color: $primary2;
+        letter-spacing: 0.5em;
+        transition: all 2s ease;
 
         @include breakpoint(mobile) {
-          transform: rotate(180deg) translateX(5px) translateY(17px);
+          font-size: 20px;
         }
       }
-
-      &.move {
-        letter-spacing: 0.1em;
-      }
-
-      @include breakpoint(mobile) {
-        font-size: 70px;
-      }
     }
 
-    p {
-      font-family: $bebasBook;
-      font-size: 30px;
-      color: $primary2;
-      letter-spacing: 0.5em;
-      transition: all 2s ease;
-
-      @include breakpoint(mobile) {
+    div.links {
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      margin: 1em 0;
+      & > a {
+        margin: 0 2em;
+        font-family: $bebasBook;
         font-size: 20px;
-      }
-    }
-
-    a {
-      font-family: $bebasBook;
-      font-size: 20px;
-      color: $primary2;
-      letter-spacing: 0.5em;
-      transition: all 2s ease;
-      margin-top: 3em;
-      text-decoration: none;
-      display: block;
-      width: 100px;
-      transition: all 0.5s ease;
-      position: relative;
-
-      &:after {
-        content: '';
-        z-index: 1;
-        position: absolute;
-        left: 0;
-        height: 5%;
-        width: 20%;
-        background-color: #ffffff;
-        top: auto;
-        bottom: -10px;
-        right: 0;
-        margin: auto;
-        transition: all 0.5s ease;
-      }
-
-      &:hover,
-      &:focus {
+        color: $primary2;
+        letter-spacing: 0.5em;
+        transition: all 2s ease;
         text-decoration: none;
-
+        display: block;
+        width: 100px;
+        transition: all 0.5s ease;
+        position: relative;
         &:after {
-          width: 100%
+          content: '';
+          z-index: 1;
+          position: absolute;
+          left: 0;
+          height: 5%;
+          width: 20%;
+          background-color: #ffffff;
+          top: auto;
+          bottom: -10px;
+          right: 0;
+          // margin: auto;
+          transition: all 0.5s ease;
         }
-      }
-
-      @include breakpoint(mobile) {
-        font-size: 20px;
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          &:after {
+            width: 50%;
+          }
+        }
+        @include breakpoint(mobile) {
+          font-size: 20px;
+        }
       }
     }
   }
