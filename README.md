@@ -1,4 +1,8 @@
-# `Initializr` [![npm](https://img.shields.io/npm/v/initializr.svg?style=flat-square)](https://www.npmjs.com/package/initializr) [![npm](https://img.shields.io/npm/dm/initializr.svg?style=flat-square)](https://npmcharts.com/compare/initializr) [![NpmLicense](https://img.shields.io/npm/l/initializr.svg?style=flat-square)](https://github.com/artisawesm/initializr/blob/master/LICENSE)
+# `Initializr (DEPRECATED)` [![npm](https://img.shields.io/npm/v/initializr.svg?style=flat-square)](https://www.npmjs.com/package/initializr) [![npm](https://img.shields.io/npm/dm/initializr.svg?style=flat-square)](https://npmcharts.com/compare/initializr) [![NpmLicense](https://img.shields.io/npm/l/initializr.svg?style=flat-square)](https://github.com/artisawesm/initializr/blob/master/LICENSE)
+
+> It's about time, as much as I would love to continue this project, I decided to end the support on this one.
+> But I am currently working on another project that has similar purpose but with more functionalities.
+> [Otomte JS](https://github.com/artisawesm/otomtejs)
 
 A Front End Web Development tool that automates minification and bundling of assets, provides Search Engine Optimized boilerplate and promotes modular coding with the help of the latest JS Frameworks.
 
